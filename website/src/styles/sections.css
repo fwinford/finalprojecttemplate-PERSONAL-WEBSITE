@@ -287,12 +287,14 @@ footer {
 
 .journey-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 2rem;
   margin: 1rem 0;
 }
 
 .journey-text {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -300,40 +302,51 @@ footer {
 
 .journey-text h2 {
   margin: 0;
-  font-size: 1.5rem;
-  color: var(--color-text);
 }
 
 .journey-stats {
   display: flex;
   gap: 2rem;
-  align-items: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.7) 100%
+  );
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .stat-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  text-align: center;
+  padding: 0.25rem;
+  min-width: 80px;
 }
 
 .stat-item h3 {
   color: var(--color-text);
-  font-size: 0.9rem;
-  margin: 0;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
 }
 
 .stat-number {
-  font-size: 1.1rem;
-  font-weight: 600;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
   margin: 0;
 }
 
-.stat-item.rejections .stat-number {
-  color: #ff6b6b;
+.stat-item:nth-child(1) .stat-number {
+  color: #ff3cac;
 }
 
-.stat-item.acceptances .stat-number {
-  color: #51cf66;
+.stat-item:nth-child(2) .stat-number {
+  color: #2b86c5;
+}
+
+.stat-item p {
+  display: none;
 }
 
 /* Projects Section */
