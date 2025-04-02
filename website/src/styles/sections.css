@@ -38,6 +38,121 @@
 .updates-section {
   flex: 1;
   min-width: 0;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+/* Timeline Styles */
+.cd-timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.cd-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 100%;
+  width: 2px;
+  background: var(--color-primary);
+}
+
+.cd-timeline-block {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.cd-timeline-block:first-child {
+  margin-top: 0;
+}
+
+.cd-timeline-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  background: white;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: var(--color-primary);
+}
+
+.cd-timeline-content {
+  position: relative;
+  margin-left: 60px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0.25em;
+  padding: 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cd-timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 100%;
+  height: 0;
+  width: 0;
+  border: 7px solid transparent;
+  border-right: 7px solid rgba(255, 255, 255, 0.8);
+}
+
+.cd-timeline-content h2 {
+  color: var(--color-text);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.cd-timeline-content p {
+  color: black;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Updates Section */
+.updates-section {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.updates-section h2 {
+  color: black;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.update-item {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.update-item:hover {
+  transform: translateY(-2px);
+}
+
+.update-date {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.update-content {
+  color: black;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 /* Projects Section */
@@ -171,16 +286,6 @@ footer {
   text-align: center;
   padding: 2rem;
   margin-top: 2rem;
-}
-
-/* Timeline Adjustments */
-.cd-timeline-block {
-  margin: 0.5rem 0;
-}
-
-.cd-timeline-content {
-  padding: 1rem;
-  margin-bottom: 0.5rem;
 }
 
 /* Full Page Sections */

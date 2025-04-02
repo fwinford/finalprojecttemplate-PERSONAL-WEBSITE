@@ -7,7 +7,6 @@ const Experience = () => {
       company: "Headstart",
       location: "San Francisco, CA",
       date: "March 2024 - Present",
-      description: "Working on innovative solutions for education technology",
       technologies: ["React", "Node.js", "TypeScript", "AWS"],
       responsibilities: [
         "Developing full-stack applications using modern technologies",
