@@ -1,0 +1,142 @@
+/* Timeline Styles */
+.cd-container {
+  width: 90%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1em 0;
+}
+
+#cd-timeline {
+  position: relative;
+  padding: 1em 0;
+}
+
+#cd-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+    transparent,
+    var(--color-primary) 10%,
+    var(--color-primary) 90%,
+    transparent
+  );
+}
+
+.cd-timeline-block {
+  position: relative;
+  margin: 1em 0;
+}
+
+.cd-timeline-block:first-child {
+  margin-top: 0;
+}
+
+.cd-timeline-block:last-child {
+  margin-bottom: 0;
+}
+
+.cd-timeline-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--color-primary);
+}
+
+.cd-timeline-content {
+  position: relative;
+  margin-left: 60px;
+  padding: 0.5em;
+  width: calc(100% - 80px);
+}
+
+.update-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+.cd-timeline-content h2 {
+  color: var(--color-primary);
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.linkedin-icon {
+  color: #0077b5;
+  font-size: 1.2em;
+  text-decoration: none;
+}
+
+.linkedin-icon:hover {
+  opacity: 0.8;
+}
+
+.timeline-content-info {
+  margin-bottom: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.timeline-content-info-title,
+.timeline-content-info-date {
+  color: var(--color-primary);
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.timeline-content-info i {
+  color: var(--color-primary);
+}
+
+.content-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin-top: 0.5em;
+  padding: 0;
+  list-style: none;
+}
+
+.content-skills li {
+  color: var(--color-primary);
+  padding: 0.3em 0.8em;
+  font-size: 0.9em;
+  border: 1px solid var(--color-primary);
+  border-radius: 15px;
+}
+
+/* Updates specific spacing */
+.updates-section .cd-timeline-block {
+  margin: 0.5em 0;
+}
+
+.updates-section .cd-timeline-content {
+  padding: 0.3em;
+}
+
+@media (max-width: 768px) {
+  .cd-container {
+    width: 100%;
+  }
+
+  .cd-timeline-content {
+    padding: 0.5em;
+  }
+
+  .cd-timeline-content h2 {
+    font-size: 1.1em;
+  }
+} 

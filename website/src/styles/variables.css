@@ -1,0 +1,41 @@
+:root {
+  /* Colors */
+  --color-primary: PaleVioletRed;
+  --color-secondary: #61dafb;
+  --color-background: #282c34;
+  --color-text: white;
+  
+  /* Timeline Colors */
+  --timeline-bg: rgba(43, 52, 58, 0.95);
+  --timeline-line: var(--color-primary);
+  --timeline-content-bg: rgba(51, 60, 66, 0.95);
+  --timeline-info-bg: rgba(43, 52, 58, 0.95);
+  --timeline-skill-bg: rgba(64, 72, 77, 0.95);
+  --timeline-text: rgba(255, 255, 255, 0.9);
+  --timeline-text-secondary: rgba(255, 255, 255, 0.7);
+  
+  /* Typography */
+  --font-primary: "Geist", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+  
+  /* Animation */
+  --animation-duration: 5s;
+  --animation-timing: linear;
+  
+  /* Layout */
+  --container-width: 1200px;
+  --section-min-height: 100vh;
+  
+  /* Z-index layers */
+  --z-index-base: 1;
+  --z-index-dropdown: 1000;
+  --z-index-modal: 2000;
+  --z-index-tooltip: 3000;
+} 

@@ -1,0 +1,69 @@
+/* Component Styles */
+
+/* About Section */
+.about-section {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  min-height: var(--section-min-height);
+  overflow-x: hidden;
+  background-image: linear-gradient(
+      in oklch longer hue to right,
+      oklch(0.93 0.08 var(--hue1) / 50%),
+      oklch(0.93 0.08 var(--hue2) / 50%)
+    ),
+    linear-gradient(
+      in oklch longer hue to bottom,
+      oklch(0.93 0.08 var(--hue1) / 50%),
+      oklch(0.93 0.08 var(--hue2) / 50%)
+    );
+  background-size: 100% 100%;
+  color: var(--color-primary);
+  animation: anim_bg var(--animation-duration) var(--animation-timing) infinite;
+}
+
+/* Logo */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+/* Header */
+.App-header {
+  background-color: var(--color-background);
+  min-height: var(--section-min-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: var(--color-text);
+}
+
+/* Animations */
+@keyframes anim_bg {
+  0% {
+    --hue1: 0deg;
+    --hue2: 300deg;
+  }
+  100% {
+    --hue1: 360deg;
+    --hue2: 660deg;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} 
