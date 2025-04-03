@@ -6,7 +6,9 @@
   position: relative;
   width: 100%;
   max-width: 100vw;
-  min-height: var(--section-min-height);
+  min-height: auto; /* Remove the minimum height constraint */
+  height: 50%; /* Let the content determine the height */
+  padding: 60px 0; /* Add vertical padding instead of fixed height */
   overflow-x: hidden;
   background-image: linear-gradient(
       in oklch longer hue to right,

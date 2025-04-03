@@ -8,6 +8,9 @@ const Navigation = () => {
       <div className="nav-container">
         <Link to="/" className="home-link">
           <img src={logo} alt="FCW Logo" />
+          <div className="name-container">
+            <span>Faith Winford</span>
+          </div>
         </Link>
         <div className="nav-links">
           <Link to="/about" className="nav-link">About</Link>
