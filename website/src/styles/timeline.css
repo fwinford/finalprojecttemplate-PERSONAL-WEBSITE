@@ -1,4 +1,6 @@
-/* Timeline Styles */
+/* -------------------------------- 
+Timeline Container and Base Structure
+-------------------------------- */
 .cd-container {
   width: 90%;
   max-width: 1080px;
@@ -6,26 +8,37 @@
   padding: 1em 0;
 }
 
+/* Section Headers */
+.experience-section h2,
+.updates-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 0.8em;
+  font-weight: 600;
+  color: #000;
+}
+
 #cd-timeline {
   position: relative;
   padding: 1em 0;
 }
 
-#cd-timeline::before {
+/* Timeline vertical line */
+#cd-timeline::before,
+.experience-section .timeline::before, 
+.updates-section .updates-content::before {
   content: '';
   position: absolute;
   top: 0;
   left: 18px;
   height: 100%;
   width: 2px;
-  background: linear-gradient(to bottom, 
-    transparent,
-    var(--color-primary) 10%,
-    var(--color-primary) 90%,
-    transparent
-  );
+  background: var(--color-primary); /* Solid color, no transparency */
+  opacity: 1; /* Ensure full opacity */
 }
 
+/* -------------------------------- 
+Timeline Blocks - Common Elements
+-------------------------------- */
 .cd-timeline-block {
   position: relative;
   margin: 1em 0;
@@ -39,6 +52,7 @@
   margin-bottom: 0;
 }
 
+/* Timeline circle marker */
 .cd-timeline-img {
   position: absolute;
   top: 0;
@@ -46,10 +60,11 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: black;
+  background: white;
   border: 2px solid var(--color-primary);
 }
 
+/* Timeline content box */
 .cd-timeline-content {
   position: relative;
   margin-left: 60px;
@@ -58,8 +73,16 @@
   background: rgba(255, 255, 255, 0.8);
   border-radius: 0.5em;
   box-shadow: 0 3px 0 var(--color-primary);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Hover effect for timeline content */
+.cd-timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Content without box styling */
 .cd-timeline-content.no-box {
   background: none;
   box-shadow: none;
@@ -67,30 +90,41 @@
   padding: 0;
 }
 
+/* -------------------------------- 
+Timeline Content Styling
+-------------------------------- */
+/* Header row with title and icons */
 .update-header {
   display: flex;
-  align-items: center;
-  gap: 0.5em;
+  align-items: flex-start; /* Changed from center to flex-start */
+  width: 100%;
   margin-bottom: 0.3em;
 }
 
-.cd-timeline-content h2, .cd-timeline-content h3 {
+/* Headings in timeline content */
+.cd-timeline-content h2, 
+.cd-timeline-content h3 {
   color: var(--color-primary);
   margin: 0;
   font-size: 1.2em;
   font-weight: 500;
+  flex: 1; /* Allow title to take up space */
 }
 
+/* LinkedIn icon styling */
 .linkedin-icon {
   color: #8bd0f6;
   font-size: 1.2em;
   text-decoration: none;
+  margin-left: 8px; /* Fixed spacing from title */
+  flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
 .linkedin-icon:hover {
   opacity: 0.8;
 }
 
+/* Info line with title/date/location */
 .timeline-content-info {
   margin-bottom: 0.5em;
   display: flex;
@@ -112,6 +146,7 @@
   color: var(--color-primary);
 }
 
+/* Skills tags */
 .content-skills {
   display: flex;
   flex-wrap: wrap;
@@ -130,6 +165,7 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
+/* Responsibilities list */
 .responsibilities {
   margin-top: 0.5em;
   padding-left: 1.5em;
@@ -141,51 +177,41 @@
   margin-bottom: 0.3em;
 }
 
-/* Updates specific spacing */
-.updates-section .cd-timeline-block {
-  margin: 0.5em 0;
-}
-
-.updates-section .cd-timeline-content {
-  padding: 0.8em;
-}
-
+/* -------------------------------- 
+Experience and Updates Sections Layout
+-------------------------------- */
 .experience-updates-container {
   display: flex;
   gap: 2em;
 }
 
-.experience-section, .updates-section {
+.experience-section, 
+.updates-section {
   flex: 1;
 }
 
-.experience-section .timeline, .updates-section .updates-content {
+/* Common timeline styling for both sections */
+.experience-section .timeline, 
+.updates-section .updates-content {
   position: relative;
   padding: 1em 0;
 }
 
-.experience-section .timeline::before, .updates-section .updates-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 18px;
-  height: 100%;
-  width: 2px;
-  background: linear-gradient(to bottom, 
-    transparent,
-    var(--color-primary) 10%,
-    var(--color-primary) 90%,
-    transparent
-  );
-}
-
-.experience-section .timeline-item, .updates-section .update-item {
+/* -------------------------------- 
+Experience Section Specific
+-------------------------------- */
+.experience-section .timeline-item {
   position: relative;
-  margin: 1em 0;
+  margin: 2em 0;
   padding-left: 60px;
+  transition: transform 0.3s ease;
 }
 
-.experience-section .timeline-item::before, .updates-section .update-item::before {
+.experience-section .timeline-item:hover {
+  transform: translateY(-5px);
+}
+
+.experience-section .timeline-item::before {
   content: '';
   position: absolute;
   top: 0;
@@ -197,6 +223,79 @@
   border: 2px solid var(--color-primary);
 }
 
+/* -------------------------------- 
+Updates Section Specific - Smaller and more compact
+-------------------------------- */
+.updates-section .update-item {
+  position: relative;
+  margin: 0.1em 0; /* Even further reduced margin for closer items */
+  padding-left: 60px;
+  padding-bottom: 0.1em; /* Minimal bottom padding */
+  transition: transform 0.3s ease;
+}
+
+.updates-section .update-item:hover {
+  transform: translateY(-5px);
+}
+
+.updates-section .update-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--color-primary);
+}
+
+.updates-section .cd-timeline-content {
+  width: calc(100% - 70px); /* Make updates cards a bit smaller */
+  padding: 0.3em 0.5em; /* Further reduced padding */
+  margin-bottom: 0.2em; /* Minimal space between cards */
+}
+
+/* Update section title styling */
+.updates-section h3 {
+  font-size: 1.2em; /* Same size as experience titles */
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+/* Consistent header layout in updates */
+.updates-section .update-header {
+  display: flex;
+  align-items: flex-start; /* Align at top to handle multi-line titles */
+  width: 100%;
+}
+
+/* Fix for LinkedIn icon alignment */
+.updates-section .update-header h3,
+.updates-section .cd-timeline-content h3 {
+  flex: 1; /* Allow title to take available space */
+  padding-right: 5px; /* Add some space between title and icon */
+}
+
+/* Reduce space after date in updates */
+.updates-section .timeline-content-info {
+  margin-bottom: 0.1em; /* Minimal margin */
+}
+
+/* Reduce space between update items */
+.updates-section .updates-content {
+  gap: 0;
+}
+
+/* Further reduce vertical spacing */
+.updates-section p {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+/* -------------------------------- 
+Responsive Styles
+-------------------------------- */
 @media (max-width: 768px) {
   .cd-container {
     width: 100%;
@@ -206,7 +305,8 @@
     padding: 0.8em;
   }
 
-  .cd-timeline-content h2, .cd-timeline-content h3 {
+  .cd-timeline-content h2, 
+  .cd-timeline-content h3 {
     font-size: 1.1em;
   }
 
@@ -214,7 +314,14 @@
     flex-direction: column;
   }
 
-  .experience-section, .updates-section {
+  .experience-section, 
+  .updates-section {
     width: 100%;
+  }
+  
+  /* Ensure consistent heading sizes on mobile */
+  .experience-section h2,
+  .updates-section h2 {
+    font-size: 1.5em;
   }
 }
