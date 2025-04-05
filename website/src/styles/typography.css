@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Global Typography
+   ========================================================================== */
+
+/**
+ * Base typography settings
+ * Applied to the entire site for consistent text styling
+ */
+ body {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+  
+  /**
+   * Heading styles
+   * Consistent styling for all heading levels
+   */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.2;
+    margin-top: 0;
+    color: var(--color-text);
+  }
+  
+  /* Individual heading sizes */
+  h1 { font-size: var(--font-size-4xl); }
+  h2 { font-size: var(--font-size-3xl); }
+  h3 { font-size: var(--font-size-2xl); }
+  h4 { font-size: var(--font-size-xl); }
+  h5 { font-size: var(--font-size-lg); }
+  h6 { font-size: var(--font-size-base); }
+  
+  /**
+   * Paragraph styles
+   */
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  /**
+   * Code and pre-formatted text
+   */
+  code, pre {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+  }
+  
+  /**
+   * Links
+   */
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  a:hover {
+    color: var(--color-primary-dark, currentColor);
+  }
+  
+  /**
+   * Special text styling
+   */
+  .text-gradient {
+    background: linear-gradient(90deg, var(--color-primary), #8a2387);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  
+  /**
+   * Name highlight for About section
+   */
+  .name-highlight {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-5xl);
+    background: linear-gradient(90deg, var(--color-primary), #8a2387);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  
+  /* About section specific typography */
+  .about-section h2 {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-5xl);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    line-height: 1.1;
+  }
+  
+  .about-section p {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-xl);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 0.75);
+  }

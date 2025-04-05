@@ -1,5 +1,12 @@
-/* Sections Layout */
-.sections-container {
+/* ==========================================================================
+   Sections Layout & Container Styles
+   ========================================================================== */
+
+/**
+ * Main container for all sections
+ * Creates vertical layout with consistent spacing
+ */
+ .sections-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -8,8 +15,16 @@
   margin: 0 auto;
 }
 
-/* About Section */
+/* ==========================================================================
+   About Section
+   ========================================================================== */
+
+/**
+ * Hero section with personal introduction
+ * Displays at 4/5 of viewport height with centered content
+ */
 .about-section {
+  /* Layout */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,24 +33,99 @@
   text-align: center;
   padding: 0;
   margin-bottom: 0;
+  position: relative; /* Needed for the gradient fade effect */
 }
 
-/* Add this new class for the gradient fade effect */
+/**
+ * Gradient fade effect at bottom of about section
+ * Creates smooth transition to the content below
+ */
 .about-section::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 80px; /* Adjust height of fade as needed */
+  height: 80px;
   background: linear-gradient(to bottom, 
               rgba(255,255,255,0) 0%, 
               rgba(255,255,255,1) 100%);
-  pointer-events: none; /* Ensures the fade doesn't interfere with clicks */
+  pointer-events: none;
   z-index: 1;
 }
 
-/* Experience and Updates Section */
+/**
+ * About section heading (your name)
+ * Large, bold display with distinctive styling
+ */
+.about-section h2 {
+  font-family: var(--font-display, "Outfit", "Geist", sans-serif);
+  font-weight: 700;
+  font-size: 3rem; /* 48px */
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  line-height: 1.1;
+  position: relative;
+  z-index: 2; /* Above the gradient fade */
+}
+
+/**
+ * About section paragraph (your tagline)
+ * Medium-sized text with proper spacing and emphasis
+ */
+.about-section p {
+  font-family: var(--font-primary, "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif);
+  font-weight: 500;
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+  color: rgba(0, 0, 0, 0.75);
+  position: relative;
+  z-index: 2; /* Above the gradient fade */
+}
+
+/**
+ * Special highlight for your name
+ * Creates a gradient text effect for emphasis
+ */
+.name-highlight {
+  font-family: var(--font-display, "Outfit", "Geist", sans-serif);
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--color-primary), #8a2387);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/**
+ * Optional animations for about section content
+ * Creates a subtle fade-in effect
+ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.about-section h2 {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.about-section p {
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+/* ==========================================================================
+   Experience & Updates Layout
+   ========================================================================== */
+
+/**
+ * Container for experience and updates sections
+ * Creates a two-column layout on desktop
+ */
 .experience-updates-container {
   display: flex;
   justify-content: space-between;
@@ -45,11 +135,19 @@
   padding: 0 1rem;
 }
 
+/**
+ * Experience section
+ * Takes up half the container width on desktop
+ */
 .experience-section {
   flex: 1;
-  min-width: 0;
+  min-width: 0; /* Prevents flexbox from overflowing */
 }
 
+/**
+ * Updates section
+ * Takes up half the container width with scrollable content
+ */
 .updates-section {
   flex: 1;
   min-width: 0;
@@ -58,12 +156,23 @@
   padding-right: 1rem;
 }
 
-/* Timeline Styles */
+/* ==========================================================================
+   Timeline Styles
+   ========================================================================== */
+
+/**
+ * Timeline container
+ * Creates vertical timeline with proper spacing
+ */
 .cd-timeline {
   position: relative;
   padding: 2rem 0;
 }
 
+/**
+ * Timeline vertical line
+ * Central line connecting all timeline events
+ */
 .cd-timeline::before {
   content: '';
   position: absolute;
@@ -74,6 +183,10 @@
   background: var(--color-primary);
 }
 
+/**
+ * Timeline block (single event)
+ * Container for each timeline entry
+ */
 .cd-timeline-block {
   position: relative;
   margin: 2rem 0;
@@ -83,6 +196,10 @@
   margin-top: 0;
 }
 
+/**
+ * Timeline event icon/dot
+ * Circular marker on the timeline
+ */
 .cd-timeline-img {
   position: absolute;
   top: 0;
@@ -98,6 +215,10 @@
   color: var(--color-primary);
 }
 
+/**
+ * Timeline content container
+ * Card containing event details
+ */
 .cd-timeline-content {
   position: relative;
   margin-left: 60px;
@@ -107,6 +228,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/**
+ * Timeline content arrow
+ * Creates pointing arrow from timeline to content
+ */
 .cd-timeline-content::before {
   content: '';
   position: absolute;
@@ -118,19 +243,32 @@
   border-right: 7px solid rgba(255, 255, 255, 0.8);
 }
 
+/**
+ * Timeline event title
+ */
 .cd-timeline-content h2 {
   color: var(--color-text);
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 
+/**
+ * Timeline event description
+ */
 .cd-timeline-content p {
   color: black;
   font-size: 0.9rem;
   line-height: 1.6;
 }
 
-/* Updates Section */
+/* ==========================================================================
+   Updates Section
+   ========================================================================== */
+
+/**
+ * Updates section container
+ * Card-like container for updates/news
+ */
 .updates-section {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
@@ -138,6 +276,9 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/**
+ * Updates section heading
+ */
 .updates-section h2 {
   color: black;
   font-size: 1.5rem;
@@ -145,6 +286,10 @@
   text-align: left;
 }
 
+/**
+ * Individual update item
+ * Card for each update with hover effect
+ */
 .update-item {
   background: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
@@ -157,6 +302,9 @@
   transform: translateY(-2px);
 }
 
+/**
+ * Update date display
+ */
 .update-date {
   color: var(--color-primary);
   font-size: 0.9rem;
@@ -164,13 +312,23 @@
   margin-bottom: 0.25rem;
 }
 
+/**
+ * Update content text
+ */
 .update-content {
   color: black;
   font-size: 0.95rem;
   line-height: 1.4;
 }
 
-/* Projects Section */
+/* ==========================================================================
+   Projects Section
+   ========================================================================== */
+
+/**
+ * Projects section container
+ * Card-like container for projects showcase
+ */
 .projects-section {
   margin: 2rem 0;
   padding: 2rem;
@@ -180,7 +338,96 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Section Styles */
+/**
+ * Projects grid layout
+ * Responsive grid for project cards
+ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+/**
+ * Individual project card
+ * Card with hover effect for each project
+ */
+.project-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+/**
+ * Project featured image
+ */
+.project-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/**
+ * Project content container
+ */
+.project-content {
+  padding: 1.5rem;
+}
+
+/**
+ * Project title
+ */
+.project-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+/**
+ * Project description
+ */
+.project-description {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+}
+
+/**
+ * Project tags container
+ */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/**
+ * Individual project tag
+ */
+.project-tag {
+  padding: 0.25rem 0.75rem;
+  background: var(--color-background);
+  color: var(--color-text);
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   Generic Section Styles
+   ========================================================================== */
+
+/**
+ * Generic section container
+ * Used for various content sections
+ */
 .section {
   padding: 1rem;
   background: rgba(255, 255, 255, 0.8);
@@ -190,6 +437,9 @@
   margin-bottom: 1rem;
 }
 
+/**
+ * Section heading
+ */
 .section h1 {
   color: var(--color-primary);
   font-size: 1.8rem;
@@ -198,7 +448,14 @@
   font-weight: 600;
 }
 
-/* Page Section Styles */
+/* ==========================================================================
+   Page Section Styles
+   ========================================================================== */
+
+/**
+ * Full page section container
+ * Used for main content areas on individual pages
+ */
 .page-section {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(5px);
@@ -207,6 +464,9 @@
   margin-bottom: 2rem;
 }
 
+/**
+ * Page section headings
+ */
 .page-section h2 {
   color: var(--color-primary);
   font-size: 1.5rem;
@@ -221,6 +481,9 @@
   font-weight: 500;
 }
 
+/**
+ * Grid layouts for various content types
+ */
 .skills-grid,
 .achievements-grid,
 .expertise-areas {
@@ -230,6 +493,9 @@
   margin: 1.5rem 0;
 }
 
+/**
+ * Card styles for grid items
+ */
 .skill-category,
 .achievement-card,
 .expertise-area {
@@ -239,18 +505,30 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/**
+ * Skill list container
+ */
 .skill-category ul {
   list-style: none;
   padding: 0;
   margin: 1rem 0 0;
 }
 
+/**
+ * Individual skill item
+ */
 .skill-category li {
   margin: 0.5rem 0;
   color: var(--color-text);
 }
 
-/* Connect Section */
+/* ==========================================================================
+   Connect Section
+   ========================================================================== */
+
+/**
+ * Contact/social media section
+ */
 .connect-section {
   text-align: center;
   padding: 2rem 1rem;
@@ -261,18 +539,27 @@
   border-radius: 15px;
 }
 
+/**
+ * Connect section heading
+ */
 .connect-section h2 {
   color: var(--color-primary);
   font-size: 1.8rem;
   margin-bottom: 1rem;
 }
 
+/**
+ * Connect section text
+ */
 .connect-section p {
   margin-bottom: 1rem;
   font-size: 1rem;
   color: var(--color-text);
 }
 
+/**
+ * Social links container
+ */
 .social-links {
   display: flex;
   justify-content: center;
@@ -280,6 +567,9 @@
   margin-top: 1rem;
 }
 
+/**
+ * Individual social link
+ */
 .social-link {
   color: var(--color-primary);
   text-decoration: none;
@@ -296,50 +586,59 @@
   transform: translateY(-2px);
 }
 
-/* Footer */
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+/**
+ * Page footer
+ */
 footer {
   text-align: center;
   padding: 2rem;
   margin-top: 2rem;
 }
 
-/* Full Page Sections */
+/* ==========================================================================
+   Full Page Sections
+   ========================================================================== */
+
+/**
+ * Full-height page section
+ */
 .full-page-section {
   min-height: calc(100vh - 60px);
   padding: 2rem;
   margin-top: 60px;
 }
 
-/* About Page Specific */
+/* ==========================================================================
+   Page-Specific Styles
+   ========================================================================== */
+
+/**
+ * About page container
+ */
 .about-page {
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Experience Page Specific */
+/**
+ * Experience page container
+ */
 .experience-page {
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .experience-updates-container {
-    flex-direction: column;
-    padding: 0;
-    gap: 2rem;
-  }
+/* ==========================================================================
+   About Page Components
+   ========================================================================== */
 
-  .experience-section,
-  .updates-section {
-    width: 100%;
-  }
-
-  .projects-section {
-    width: 100%;
-  }
-}
-
+/**
+ * About carousel component
+ */
 .about-carousel {
   margin: 2rem 0;
   padding: 2rem;
@@ -362,12 +661,18 @@ footer {
   );
 }
 
+/**
+ * About content layout
+ */
 .about-content {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
+/**
+ * About introduction section
+ */
 .about-intro {
   text-align: center;
   max-width: 800px;
@@ -380,6 +685,9 @@ footer {
   color: var(--color-text);
 }
 
+/**
+ * Highlighted word styling
+ */
 .highlight-word {
   color: var(--color-primary);
   font-weight: 600;
@@ -405,6 +713,9 @@ footer {
   transform-origin: left;
 }
 
+/**
+ * Journey section container
+ */
 .journey-container {
   display: flex;
   justify-content: space-between;
@@ -413,6 +724,9 @@ footer {
   margin: 1rem 0;
 }
 
+/**
+ * Journey text content
+ */
 .journey-text {
   flex: 1;
   display: flex;
@@ -424,6 +738,9 @@ footer {
   margin: 0;
 }
 
+/**
+ * Journey statistics display
+ */
 .journey-stats {
   display: flex;
   gap: 2rem;
@@ -438,6 +755,9 @@ footer {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
+/**
+ * Individual statistic item
+ */
 .stat-item {
   text-align: center;
   padding: 0.25rem;
@@ -469,64 +789,31 @@ footer {
   display: none;
 }
 
-/* Projects Section */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 1.5rem;
-}
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
 
-.project-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-.project-image {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.project-content {
-  padding: 1.5rem;
-}
-
-.project-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: 0.5rem;
-}
-
-.project-description {
-  font-size: 0.9rem;
-  color: var(--color-text-light);
-  margin-bottom: 1rem;
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.project-tag {
-  padding: 0.25rem 0.75rem;
-  background: var(--color-background);
-  color: var(--color-text);
-  border-radius: 15px;
-  font-size: 0.8rem;
-}
-
+/**
+ * Tablet and mobile adjustments
+ */
 @media (max-width: 768px) {
+  /* Layout adjustments */
+  .experience-updates-container {
+    flex-direction: column;
+    padding: 0;
+    gap: 2rem;
+  }
+
+  .experience-section,
+  .updates-section {
+    width: 100%;
+  }
+
+  .projects-section {
+    width: 100%;
+  }
+  
+  /* Journey section adjustments */
   .journey-container {
     flex-direction: column;
   }
@@ -534,4 +821,27 @@ footer {
   .journey-stats {
     width: 100%;
   }
-} 
+  
+  /* About section adjustments */
+  .about-section h2 {
+    font-size: 2.5rem; /* Smaller heading on mobile */
+  }
+  
+  .about-section p {
+    font-size: 1.1rem; /* Smaller paragraph on mobile */
+    padding: 0 1rem;
+  }
+}
+
+/**
+ * Small mobile adjustments
+ */
+@media (max-width: 480px) {
+  .about-section h2 {
+    font-size: 2rem; /* Even smaller heading on small devices */
+  }
+  
+  .social-links {
+    flex-wrap: wrap;
+  }
+}
