@@ -59,9 +59,9 @@
  * Large, bold display with distinctive styling
  */
 .about-section h2 {
-  font-family: var(--font-display, "Outfit", "Geist", sans-serif);
-  font-weight: 700;
-  font-size: 3rem; /* 48px */
+  font-family: 'Playfair Display', serif;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-5xl);
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
   color: var(--color-primary);
@@ -75,9 +75,9 @@
  * Medium-sized text with proper spacing and emphasis
  */
 .about-section p {
-  font-family: var(--font-primary, "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif);
-  font-weight: 500;
-  font-size: 1.25rem; /* 20px */
+  font-family: 'Playfair Display', serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xl);
   line-height: 1.6;
   max-width: 700px;
   margin: 0 auto;
@@ -91,8 +91,8 @@
  * Creates a gradient text effect for emphasis
  */
 .name-highlight {
-  font-family: var(--font-display, "Outfit", "Geist", sans-serif);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
   background: linear-gradient(90deg, var(--color-primary), #8a2387);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -116,6 +116,24 @@
   animation: fadeIn 0.8s ease-out 0.2s forwards;
   opacity: 0;
   animation-fill-mode: forwards;
+}
+
+.learn-more {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.underlined-link {
+  text-decoration: underline;
+  color: rgba(0, 0, 0, 0.75);
+  font-weight: var(--font-weight-medium);
+  transition: color 0.2s ease;
+}
+
+.underlined-link:hover {
+  color: var(--color-primary);
 }
 
 /* ==========================================================================
@@ -248,8 +266,10 @@
  */
 .cd-timeline-content h2 {
   color: var(--color-text);
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg);
   margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
 }
 
 /**
@@ -259,21 +279,24 @@
   color: black;
   font-size: 0.9rem;
   line-height: 1.6;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
 }
 
 /* ==========================================================================
    Updates Section
    ========================================================================== */
 
-
 /**
  * Updates section heading
  */
 .updates-section h2 {
   color: black;
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
   margin-bottom: 1rem;
   text-align: left;
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
 }
 
 /**
@@ -298,8 +321,9 @@
 .update-date {
   color: var(--color-primary);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   margin-bottom: 0.25rem;
+  font-family: var(--font-primary);
 }
 
 /**
@@ -309,6 +333,8 @@
   color: black;
   font-size: 0.95rem;
   line-height: 1.4;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
 }
 
 /* ==========================================================================
@@ -375,19 +401,22 @@
  * Project title
  */
 .project-title {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text);
   margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
 }
 
 /**
  * Project description
  */
 .project-description {
-  font-size: 0.9rem;
+  font-size: var(--font-size-base);
   color: var(--color-text-light);
   margin-bottom: 1rem;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
 }
 
 /**
@@ -408,6 +437,8 @@
   color: var(--color-text);
   border-radius: 15px;
   font-size: 0.8rem;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
 }
 
 /* ==========================================================================
@@ -432,10 +463,11 @@
  */
 .section h1 {
   color: var(--color-primary);
-  font-size: 1.8rem;
+  font-size: var(--font-size-3xl);
   margin-bottom: 1rem;
   text-align: center;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-heading);
 }
 
 /* ==========================================================================
@@ -459,16 +491,18 @@
  */
 .page-section h2 {
   color: var(--color-primary);
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   margin-bottom: 1rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-heading);
 }
 
 .page-section h3 {
   color: var(--color-text);
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg);
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-heading);
 }
 
 /**
@@ -510,6 +544,7 @@
 .skill-category li {
   margin: 0.5rem 0;
   color: var(--color-text);
+  font-family: var(--font-primary);
 }
 
 /* ==========================================================================
@@ -534,8 +569,10 @@
  */
 .connect-section h2 {
   color: var(--color-primary);
-  font-size: 1.8rem;
+  font-size: var(--font-size-3xl);
   margin-bottom: 1rem;
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
 }
 
 /**
@@ -543,8 +580,9 @@
  */
 .connect-section p {
   margin-bottom: 1rem;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   color: var(--color-text);
+  font-family: var(--font-primary);
 }
 
 /**
@@ -563,11 +601,12 @@
 .social-link {
   color: var(--color-primary);
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg);
   transition: all 0.3s ease;
   padding: 0.8rem 1.5rem;
   border-radius: 25px;
   background: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-primary);
 }
 
 .social-link:hover {
@@ -587,6 +626,7 @@ footer {
   text-align: center;
   padding: 2rem;
   margin-top: 2rem;
+  font-family: var(--font-primary);
 }
 
 /* ==========================================================================
@@ -626,157 +666,424 @@ footer {
    About Page Components
    ========================================================================== */
 
-/**
- * About carousel component
- */
-.about-carousel {
-  margin: 2rem 0;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(5px);
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* -----------------------------
+   1. Layout & Container Styles
+   ----------------------------- */
+   .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  
+  .about-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--color-text-primary, #000);
+  }
+  
+  .about-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+  
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  /* -----------------------------
+     2. Text Column Styles
+     ----------------------------- */
+  .about-text-column {
+    flex: 0.45; /* 45% width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  .about-text-column.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .about-story p {
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+  
+  .dynamic-caption {
+    color: var(--color-primary, #ff69b4);
+    font-weight: 500;
+  }
+  
+  .personal-narrative {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    border-left: 3px solid var(--color-primary, #ff69b4);
+    background-color: rgba(255, 105, 180, 0.05);
+    border-radius: 4px;
+    font-style: italic;
+    color: var(--color-text-primary, #333);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .personal-narrative.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* -----------------------------
+     3. Image Column Styles
+     ----------------------------- */
+  .about-image-column {
+    flex: 0.55; /* 55% width */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .about-carousel {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-carousel .carousel-container {
+    min-height: auto;
+    background: transparent;
+  }
+  
+  .about-carousel .carousel-content {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+  
+  /* -----------------------------
+     4. Section Transition Styles
+     ----------------------------- */
+  .section-transition {
+    padding: 2rem 0 1rem;
+    text-align: center;
+    position: relative;
+    border-top: none !important;
+    border-bottom: none !important;
+  }
+  
+  .transition-text {
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text-primary, #333);
+  }
+  
+  .transition-visual {
+    height: 40px;
+    position: relative;
+    margin: 1.5rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+  }
+  
+  .gradient-path {
+    height: 2px;
+    width: 0%;
+    background-color: var(--color-primary, #ff69b4);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 1.2s ease-out;
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
+  }
+  
+  .transition-heading {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--color-text-primary, #333);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s ease;
+  }
+  
+  /* Transition animation states */
+  .section-transition.visible .gradient-path {
+    width: 80%;
+  }
+  
+  .section-transition.visible .transition-visual,
+  .section-transition.visible .transition-heading {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Remove borders and lines */
+  .section-transition::before,
+  .section-transition::after,
+  .updates-section::before,
+  .updates-section::after {
+    display: none !important;
+  }
+  
+  /* -----------------------------
+     5. Updates Section Styles
+     ----------------------------- */
+  .updates-section {
+    margin-top: 0;
+    padding-top: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .updates-section.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Update item animations */
+  .update-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .update-item.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Timeline styling */
+  .cd-timeline-img {
+    background-color: var(--color-primary, #ff69b4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .update-item:hover .cd-timeline-img {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.2);
+  }
+  
+  .cd-timeline-content {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .update-item:hover .cd-timeline-content {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* -----------------------------
+     6. Introduction & Highlight Styles
+     ----------------------------- */
+  .about-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .about-intro p {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--color-text);
+    font-family: var(--font-primary);
+  }
+  
+  .highlight-word {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    position: relative;
+    display: inline-block;
+  }
+  
+  .highlight-word::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary), transparent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  
+  .highlight-word:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  
+  /* -----------------------------
+     7. Journey Stats Styles
+     ----------------------------- */
+  .journey-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin: 1rem 0;
+  }
+  
+  .journey-text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .journey-text h2 {
+    margin: 0;
+    font-family: var(--font-heading);
+  }
+  
+  .journey-stats {
+    display: flex;
+    gap: 2rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.7) 100%
+    );
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  .stat-item {
+    text-align: center;
+    padding: 0.25rem;
+    min-width: 80px;
+  }
+  
+  .stat-item h3 {
+    color: var(--color-text);
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-medium);
+  }
+  
+  .stat-number {
+    display: block;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+    font-family: var(--font-heading);
+  }
+  
+  .stat-item:nth-child(1) .stat-number {
+    color: #ff3cac;
+  }
+  
+  .stat-item:nth-child(2) .stat-number {
+    color: #2b86c5;
+  }
+  
+  .stat-item p {
+    display: none;
+  }
+  
+  /* -----------------------------
+     8. Responsive Styles
+     ----------------------------- */
+  @media (max-width: 992px) {
+    .about-content-wrapper {
+      flex-direction: column-reverse;
+      gap: 2rem;
+    }
+    
+    .about-text-column,
+    .about-image-column {
+      flex: 1;
+      width: 100%;
+    }
+    
+    .about-heading {
+      font-size: 2rem;
+    }
+    
+    .personal-narrative {
+      font-size: 1.1rem;
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .about-container {
+      padding: 1.5rem 1rem;
+    }
+    
+    .about-heading {
+      font-size: 1.75rem;
+    }
+    
+    .about-story p {
+      font-size: 1rem;
+    }
+  }
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .about-content-wrapper {
+    flex-direction: column-reverse; /* Stack columns on smaller screens */
+    gap: 2rem;
+  }
+  
+  .about-text-column,
+  .about-image-column {
+    flex: 1;
+    width: 100%;
+  }
+  
+  .about-heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .personal-narrative {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
 }
 
-.about-carousel .carousel-container {
-  min-height: auto;
-  background: transparent;
-}
-
-.about-carousel .carousel-content {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.28) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
-
-/**
- * About content layout
- */
-.about-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/**
- * About introduction section
- */
-.about-intro {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.about-intro p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: var(--color-text);
-}
-
-/**
- * Highlighted word styling
- */
-.highlight-word {
-  color: var(--color-primary);
-  font-weight: 600;
-  position: relative;
-  display: inline-block;
-}
-
-.highlight-word::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-primary), transparent);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
-}
-
-.highlight-word:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-/**
- * Journey section container
- */
-.journey-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-  margin: 1rem 0;
-}
-
-/**
- * Journey text content
- */
-.journey-text {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.journey-text h2 {
-  margin: 0;
-}
-
-/**
- * Journey statistics display
- */
-.journey-stats {
-  display: flex;
-  gap: 2rem;
-  padding: 0.5rem 1rem;
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.7) 100%
-  );
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-/**
- * Individual statistic item
- */
-.stat-item {
-  text-align: center;
-  padding: 0.25rem;
-  min-width: 80px;
-}
-
-.stat-item h3 {
-  color: var(--color-text);
-  font-size: 0.8rem;
-  margin-bottom: 0.25rem;
-}
-
-.stat-number {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-.stat-item:nth-child(1) .stat-number {
-  color: #ff3cac;
-}
-
-.stat-item:nth-child(2) .stat-number {
-  color: #2b86c5;
-}
-
-.stat-item p {
-  display: none;
+@media (max-width: 576px) {
+  .about-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .about-heading {
+    font-size: 1.75rem;
+  }
+  
+  .transition-heading {
+    font-size: 1.5rem;
+  }
 }
 
 /* ==========================================================================
@@ -814,11 +1121,11 @@ footer {
   
   /* About section adjustments */
   .about-section h2 {
-    font-size: 2.5rem; /* Smaller heading on mobile */
+    font-size: var(--font-size-4xl); /* Smaller heading on mobile */
   }
   
   .about-section p {
-    font-size: 1.1rem; /* Smaller paragraph on mobile */
+    font-size: var(--font-size-lg); /* Smaller paragraph on mobile */
     padding: 0 1rem;
   }
 }
@@ -828,10 +1135,28 @@ footer {
  */
 @media (max-width: 480px) {
   .about-section h2 {
-    font-size: 2rem; /* Even smaller heading on small devices */
+    font-size: var(--font-size-3xl); /* Even smaller heading on small devices */
   }
   
   .social-links {
     flex-wrap: wrap;
   }
+}
+
+/* Force timeline visibility */
+.updates-section {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.update-item {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.cd-timeline-img {
+  width: 40px !important;
+  height: 40px !important;
+  position: absolute !important;
+  display: block !important;
 }

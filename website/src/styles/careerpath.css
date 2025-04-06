@@ -1,0 +1,206 @@
+.career-path-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 20px 60px; /* Reduced top padding */
+    background: white;
+    overflow: hidden;
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #555;
+    opacity: 0;
+    animation: fadeInTitle 1.2s ease forwards;
+  }
+  .section-title .highlight {
+    color: #db7092;
+    font-weight: 500;
+    display: inline-block;
+    animation: gentleBounce 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeInTitle {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes gentleBounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  .flow-container {
+    position: relative;
+    max-width: 1200px;
+    min-height: 80vh;
+    margin: 0 auto;
+    /* Height will be set dynamically in JS */
+  }
+  
+  /* Free-form floating nodes container */
+  .career-nodes {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Individual node */
+  .career-node {
+    position: absolute;
+    width: 320px; /* Wider boxes */
+    transition: transform 0.1s ease;
+    will-change: transform;
+    z-index: 2;
+  }
+  
+  /* Content card */
+  .node-content {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px; /* Even padding all around */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .career-node:hover .node-content {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .career-node.active .node-content {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+/* Aura ball - positioned at the top right corner */
+.node-aura {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    filter: blur(8px);
+    opacity: 0.9;
+    box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    animation: pulse-aura 3s infinite ease-in-out alternate;
+    z-index: 1;
+    left: -35px; /* Position at the right edge */
+    top: 5px;   /* Position at the top edge */
+  }
+  
+  @keyframes pulse-aura {
+    0% {
+      opacity: 0.8;
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(10px);
+    }
+  }
+  
+  /* Hover state for aura - remove gray shadow */
+  .career-node:hover .node-aura {
+    filter: blur(12px);
+    opacity: 1;
+    /* Use same color as the ball but more intense */
+    box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.4);
+  }
+  
+  /* Text styling */
+  .node-title {
+    color: #333; /* Black for title */
+    margin: 0 0 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .node-organization {
+    /* Will be colored dynamically to match aura */
+    margin: 0 0 5px;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .node-date {
+    color: #888; /* Light gray for dates */
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  
+  .node-description {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .node-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .career-node.active .node-details {
+    max-height: 300px;
+    opacity: 1;
+  }
+  
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+  }
+  
+  .skill-tag {
+    background: rgba(179, 212, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #333;
+  }
+  
+  .node-lesson {
+    font-style: italic;
+    margin-top: 15px;
+    color: #555;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .flow-container {
+      height: auto !important;
+      min-height: 80vh;
+    }
+    
+    .career-nodes {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+    }
+    
+    .career-node {
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      margin: 0 auto 30px auto;
+      transform: none !important;
+      width: 100%;
+      max-width: 320px;
+    }
+  }

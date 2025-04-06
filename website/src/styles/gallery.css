@@ -1,0 +1,211 @@
+/* Personal Gallery Styling */
+.personal-gallery {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .gallery-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4; /* Portrait orientation */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    margin-bottom: 1rem;
+  }
+  
+  .gallery-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+  
+  .gallery-image-wrapper.active {
+    opacity: 1;
+  }
+  
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .gallery-image:hover {
+    transform: scale(1.02);
+  }
+  
+  .location-badge {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--color-text-secondary, #333);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(0);
+    transition: transform 0.4s ease;
+  }
+  
+/* Navigation dots - made larger and more clickable */
+.gallery-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Increased gap between dots */
+    margin-top: 1.5rem;
+  }
+  
+  .nav-dot {
+    width: 16px; /* Increased size from 10px */
+    height: 16px; /* Increased size from 10px */
+    border-radius: 50%;
+    background-color: #ccc;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* Add tap target padding for mobile */
+    position: relative;
+  }
+  
+  /* Create a larger invisible hit area for better touch targets */
+  .nav-dot::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border-radius: 50%;
+  }
+  
+  .nav-dot.active {
+    background-color: var(--color-primary, #ff69b4);
+    transform: scale(1.2); /* Slightly reduced from 1.3 for better proportions */
+  }
+  
+  .nav-dot:hover {
+    background-color: #aaa;
+    transform: scale(1.1);
+  }
+  
+  /* Add arrow navigation for easier image switching */
+  .gallery-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    margin-bottom: 1rem;
+    cursor: pointer; /* Make the entire image clickable */
+  }
+  
+  /* Optional: Add arrow navigation buttons */
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .gallery-arrow-left {
+    left: 15px;
+  }
+  
+  .gallery-arrow-right {
+    right: 15px;
+  }
+  
+  .gallery-image-container:hover .gallery-arrow {
+    opacity: 1;
+  }
+  
+  .gallery-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Add to gallery.css */
+
+/* Initial state - hidden */
+.personal-gallery {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  /* Visible state - add this class with JavaScript on component mount */
+  .personal-gallery.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Main image container entry animation */
+  .gallery-image-container {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s, box-shadow 0.3s ease;
+  }
+  
+  .personal-gallery.animate-in .gallery-image-container {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Navigation dots entry animation */
+  .gallery-navigation {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+  }
+  
+  .personal-gallery.animate-in .gallery-navigation {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Location badge entry animation */
+  .location-badge {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .gallery-image-wrapper.active .location-badge {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .gallery-image-container {
+      max-height: 500px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .gallery-image-container {
+      max-height: 400px;
+    }
+  }

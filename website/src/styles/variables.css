@@ -1,10 +1,13 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
   /* Colors */
-  --color-primary: PaleVioletRed;
+  --color-primary: #bb3e66; /* Updated to match the pink in the image */
   --color-secondary: #61dafb;
   --color-background: #282c34;
   --color-text: black;
-  --color-primary-dark: #552633;
+  --color-primary-dark: #9a3254;
   
   /* Timeline Colors */
   --timeline-bg: rgba(43, 52, 58, 0.95);
@@ -15,28 +18,25 @@
   --timeline-text: rgba(255, 255, 255, 0.9);
   --timeline-text-secondary: rgba(255, 255, 255, 0.7);
   
-  /* Typography */
-  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  --font-heading: "Manrope", "Geist", sans-serif; /* Add this new font variable */
-  --font-display: "Outfit", "Geist", sans-serif; /* Add this for large display text */
-  --font-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  /* Font families */
+  --font-primary: 'Playfair Display', serif;;
+  --font-display: 'Playfair Display', serif; /* This is for the heading */
+  --font-heading: 'Playfair Display', serif;
   
-    /* Font weights */
+  /* Font weights */
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-
-    /* Font sizes */
-  --font-size-sm: 0.875rem;
+  
+  /* Font sizes - updated with responsive sizes */
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
+  --font-size-xl: clamp(1rem, 2vw, 1.25rem);
   --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-  --font-size-4xl: 2.5rem;
-  --font-size-5xl: 3rem;
-
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: clamp(2rem, 6vw, 3.5rem);
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -58,4 +58,87 @@
   --z-index-dropdown: 1000;
   --z-index-modal: 2000;
   --z-index-tooltip: 3000;
-} 
+}
+
+/* ==========================================================================
+   Global Typography
+   ========================================================================== */
+
+/* Import fonts - make sure these are at the top of your CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Keep your original colors */
+  --color-primary: PaleVioletRed;
+  --color-secondary: #61dafb;
+  --color-background: #282c34;
+  --color-text: black;
+  --color-primary-dark: #552633;
+  
+  /* Timeline Colors - keep as is */
+  --timeline-bg: rgba(43, 52, 58, 0.95);
+  --timeline-line: var(--color-primary);
+  --timeline-content-bg: rgba(51, 60, 66, 0.95);
+  --timeline-info-bg: rgba(43, 52, 58, 0.95);
+  --timeline-skill-bg: rgba(64, 72, 77, 0.95);
+  --timeline-text: rgba(255, 255, 255, 0.9);
+  --timeline-text-secondary: rgba(255, 255, 255, 0.7);
+  
+  /* Font families */
+  --font-primary: 'Inter', sans-serif;
+  --font-heading: 'Sora', sans-serif;
+  --font-display: 'Sora', sans-serif;
+  --font-code: 'Courier New', monospace;
+  
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Font sizes - only updating the 5xl size to be responsive */
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem; /* Keep your original value */
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: clamp(2rem, 6vw, 3.5rem); /* This helps with responsive sizing */
+
+  /* Keep all other variables as is */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+  --animation-duration: 5s;
+  --animation-timing: linear;
+  --container-width: 1200px;
+  --section-min-height: 100vh;
+  --z-index-base: 1;
+  --z-index-dropdown: 1000;
+  --z-index-modal: 2000;
+  --z-index-tooltip: 3000;
+}
+
+/* About section specific typography - just fixing the styling */
+.about-section h2 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-5xl);
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  line-height: 1.1;
+  position: relative;
+  z-index: 2;
+}
+
+.about-section p {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xl);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import About from '../About';
-import Experience from '../shared/Experience';
-import Updates from '../shared/Updates';
+import CareerPath from '../CareerPath'; // Updated import path
 import Connect from '../Connect';
 import Footer from '../shared/Footer';
 
@@ -10,10 +9,16 @@ const HomePage = () => (
     <section className="about-section">
       <About />
     </section>
-    <div className="experience-updates-container">
+    
+    {/* Add CareerPath here - replacing or alongside Experience/Updates */}
+    <CareerPath />
+    
+    {/* You can comment out this section if you want to replace it completely with CareerPath */}
+    {/* <div className="experience-updates-container">
       <Experience />
       <Updates />
-    </div>
+    </div> */}
+    
     <Connect />
     <Footer />
   </>
