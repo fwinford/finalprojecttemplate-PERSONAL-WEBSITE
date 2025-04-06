@@ -1,0 +1,193 @@
+/* about-page.css - About page specific styles */
+
+/* ==========================================================================
+   About Page Components
+   ========================================================================== */
+
+/**
+ * About page container
+ */
+ .about-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* -----------------------------
+     1. Layout & Container Styles
+     ----------------------------- */
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  
+  .about-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--color-text-primary, #000);
+  }
+  
+  .about-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+  
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  /* -----------------------------
+     2. Text Column Styles
+     ----------------------------- */
+  .about-text-column {
+    flex: 0.45; /* 45% width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  .about-text-column.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .about-story p {
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+  
+  .dynamic-caption {
+    color: var(--color-primary, #ff69b4);
+    font-weight: 500;
+  }
+  
+  .personal-narrative {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    border-left: 3px solid var(--color-primary, #ff69b4);
+    background-color: rgba(255, 105, 180, 0.05);
+    border-radius: 4px;
+    font-style: italic;
+    color: var(--color-text-primary, #333);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .personal-narrative.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* -----------------------------
+     3. Image Column Styles
+     ----------------------------- */
+  .about-image-column {
+    flex: 0.55; /* 55% width */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .about-carousel {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-carousel .carousel-container {
+    min-height: auto;
+    background: transparent;
+  }
+  
+  .about-carousel .carousel-content {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+  
+  /* -----------------------------
+     4. Section Transition Styles
+     ----------------------------- */
+  .section-transition {
+    padding: 2rem 0 1rem;
+    text-align: center;
+    position: relative;
+    border-top: none !important;
+    border-bottom: none !important;
+  }
+  
+  .transition-text {
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text-primary, #333);
+  }
+  
+  .transition-visual {
+    height: 40px;
+    position: relative;
+    margin: 1.5rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+  }
+  
+  .gradient-path {
+    height: 2px;
+    width: 0%;
+    background-color: var(--color-primary, #ff69b4);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 1.2s ease-out;
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
+  }
+  
+  .transition-heading {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--color-text-primary, #333);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s ease;
+  }
+  
+  /* Transition animation states */
+  .section-transition.visible .gradient-path {
+    width: 80%;
+  }
+  
+  .section-transition.visible .transition-visual,
+  .section-transition.visible .transition-heading {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Remove borders and lines */
+  .section-transition::before,
+  .section-transition::after,
+  .updates-section::before,
+  .updates-section::after {
+    display: none !important;
+  }

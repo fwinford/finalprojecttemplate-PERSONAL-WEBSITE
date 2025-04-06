@@ -1,15 +1,32 @@
-/* Import all CSS files */
-@import './variables.css';
-@import './typography.css';
-@import './base.css';
-@import './layout.css';
-@import './components.css';
-@import './timeline.css';
-@import './sections.css';
-@import './navigation.css';
-@import './gallery.css';
+/* main.css */
+
+/* Import base styles */
+@import 'variables.css';
+@import 'base.css';
+@import 'typography.css';
+
+/* Import layout styles */
+@import 'layout.css';
+@import 'sections.css';
+
+/* Import component styles */
+@import 'components/components.css';
+@import 'components/navigation.css';
+@import 'components/gallery.css';
+@import 'components/carousel.css';
+@import 'components/timeline.css';
+
+/* Import page-specific styles */
+@import 'page-styles/about-page.css';
+@import 'page-styles/about-section.css';
+@import 'page-styles/projects.css';
+@import 'page-styles/connect.css';
+
+/* Import animation and responsive styles */
+@import 'animations.css';
+@import 'responsive.css';
 
 /* Remove welcome text styles */
 .welcome-text {
   display: none;
-} 
+}

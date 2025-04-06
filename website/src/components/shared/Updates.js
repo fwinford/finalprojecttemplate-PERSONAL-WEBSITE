@@ -1,24 +1,12 @@
 import React, { useEffect, useRef } from 'react';
+import { getAllUpdates } from './UpdatesData';
 
 const Updates = ({ hideTitle = false }) => {
   const updatesRef = useRef(null);
   const updateItemsRef = useRef([]);
   
-  const updates = [
-    {
-      title: "Started New Role at Headstart",
-      date: "March 2024",
-      description: "Excited to announce my new position as a Software Engineer at Headstart!",
-      linkedinUrl: "https://linkedin.com/in/yourprofile/posts/123456789"
-    },
-    {
-      title: "Completed Advanced Web Development Course",
-      date: "February 2024",
-      description: "Just finished an intensive course on modern web development technologies.",
-      linkedinUrl: "https://linkedin.com/in/yourprofile/posts/123456788"
-    },
-    // Add more updates as needed
-  ];
+  // Get updates from the separate data file and reverse the order (newest first)
+  const updates = [...getAllUpdates()].reverse();
 
   // Set up intersection observer for scroll animations
   useEffect(() => {
@@ -82,27 +70,30 @@ const Updates = ({ hideTitle = false }) => {
 
   return (
     <section className="updates-section" ref={updatesRef}>
-      {!hideTitle && <h2 className="animate-on-scroll">Updates</h2>}
-      <div className="updates-content">
+      {!hideTitle && <h2 className="animate-on-scroll">RECENT MILESTONES</h2>}
+      <div className="cd-timeline">
+        {/* Add explicit timeline line */}
+        <div className="timeline-line"></div>
+        
         {updates.map((update, index) => (
           <div 
-            key={index} 
+            key={update.id} 
             className="update-item cd-timeline-block"
             ref={el => updateItemsRef.current[index] = el}
           >
             <div className="cd-timeline-img"></div>
             <div className="cd-timeline-content">
-              <div className="update-header">
-                <h3>{update.title}</h3>
-                <a href={update.linkedinUrl} className="linkedin-icon" target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-linkedin"></i>
-                </a>
-              </div>
-              <div className="timeline-content-info">
-                <span className="timeline-content-info-date">
+              <h3>{update.title}</h3>
+              <div className="meta-info">
+                <span className="timeline-date">
                   <i className="far fa-calendar"></i>
                   {update.date}
                 </span>
+                {update.linkedinUrl && (
+                  <a href={update.linkedinUrl} className="linkedin-icon" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-linkedin"></i>
+                  </a>
+                )}
               </div>
               <p>{update.description}</p>
             </div>

@@ -1,0 +1,144 @@
+/* about-section.css - Home page about/intro section */
+
+/* ==========================================================================
+   About Section
+   ========================================================================== */
+
+/**
+ * Hero section with personal introduction
+ * Displays at 4/5 of viewport height with centered content
+ */
+ .about-section {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh * 4/5);
+    text-align: center;
+    padding: 0;
+    margin-bottom: 0;
+    position: relative; /* Needed for the gradient fade effect */
+  }
+  
+  /**
+   * Gradient fade effect at bottom of about section
+   * Creates smooth transition to the content below
+   */
+  .about-section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,1) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /**
+   * About section heading (your name)
+   * Large, bold display with distinctive styling
+   */
+  .about-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-5xl);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    line-height: 1.1;
+    position: relative;
+    z-index: 2; /* Above the gradient fade */
+  }
+  
+  /**
+   * About section paragraph (your tagline)
+   * Medium-sized text with proper spacing and emphasis
+   */
+  .about-section p {
+    font-family: 'Playfair Display', serif;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-xl);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 0.75);
+    position: relative;
+    z-index: 2; /* Above the gradient fade */
+  }
+  
+  /**
+   * Special highlight for your name
+   * Creates a gradient text effect for emphasis
+   */
+  .name-highlight {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(90deg, var(--color-primary), #8a2387);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  
+  .learn-more {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-lg);
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .underlined-link {
+    text-decoration: underline;
+    color: rgba(0, 0, 0, 0.75);
+    font-weight: var(--font-weight-medium);
+    transition: color 0.2s ease;
+  }
+  
+  .underlined-link:hover {
+    color: var(--color-primary);
+  }
+  
+  /**
+   * About intro and highlight styles
+   */
+  .about-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .about-intro p {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--color-text);
+    font-family: var(--font-primary);
+  }
+  
+  .highlight-word {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    position: relative;
+    display: inline-block;
+  }
+  
+  .highlight-word::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary), transparent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  
+  .highlight-word:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }

@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
-import '../styles/gallery.css';
 
 // Image paths - based on your file structure
 const imagePaths = [
