@@ -1,7 +1,6 @@
 import React from 'react';
 import About from '../About';
 import CareerPath from '../CareerPath'; // Updated import path
-import Connect from '../Connect';
 import Footer from '../shared/Footer';
 
 const HomePage = () => (
@@ -19,7 +18,6 @@ const HomePage = () => (
       <Updates />
     </div> */}
     
-    <Connect />
     <Footer />
   </>
 );

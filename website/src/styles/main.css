@@ -15,12 +15,12 @@
 @import 'components/gallery.css';
 @import 'components/carousel.css';
 @import 'components/timeline.css';
+@import 'components/footer.css';
 
 /* Import page-specific styles */
 @import 'page-styles/about-page.css';
 @import 'page-styles/about-section.css';
 @import 'page-styles/projects.css';
-@import 'page-styles/connect.css';
 
 /* Import animation and responsive styles */
 @import 'animations.css';

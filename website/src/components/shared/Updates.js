@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { getAllUpdates } from './UpdatesData';
+import { getAllUpdates } from '../../data/UpdatesData';
 
 const Updates = ({ hideTitle = false }) => {
   const updatesRef = useRef(null);

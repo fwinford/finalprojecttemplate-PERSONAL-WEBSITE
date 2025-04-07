@@ -90,7 +90,6 @@ const AboutPage = () => {
   return (
     <div className="full-page-section">
       <div className="about-container">
-        <h1 className="about-heading">THE JOURNEY SO FAR</h1>
         
         <div className="about-content-wrapper">
           {/* Text Column */}

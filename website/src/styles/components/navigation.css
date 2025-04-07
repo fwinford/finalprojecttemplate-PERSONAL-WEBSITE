@@ -196,3 +196,102 @@
     }
   }
 }
+
+/* Container for nav links and social links */
+.nav-content {
+  display: flex;
+  align-items: center;
+}
+
+/* Social icons in navigation */
+.social-nav-links {
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem; /* Space between nav links and social links */
+  padding-left: 1.5rem; /* Space for the separator */
+  position: relative; /* For the separator */
+}
+
+/* Subtle separator between nav links and social links */
+.social-nav-links::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 24px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1), transparent);
+}
+
+/* Individual social icon link */
+.social-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--color-primary);
+  transition: all 0.2s ease;
+  position: relative;
+  margin: 0 0.3rem;
+}
+
+/* Icon sizing */
+.social-nav-icon {
+  font-size: 1.1rem;
+}
+
+/* Hover effect for social icons */
+.social-nav-link:hover {
+  color: #c44d69; /* Same as your nav-link underline */
+  transform: translateY(-2px);
+}
+
+/* Underline effect for social icons (similar to nav links) */
+.social-nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #c44d69;
+  transition: width 0.25s ease-in-out;
+}
+
+.social-nav-link:hover::after {
+  width: 80%; /* Slightly shorter than nav links for distinction */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .social-nav-links {
+    margin-left: 1rem;
+    padding-left: 1rem;
+  }
+  
+  .social-nav-link {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .social-nav-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* On very small screens, ensure social icons remain visible */
+  .social-nav-links {
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  
+  .social-nav-link {
+    width: 28px;
+    height: 28px;
+    margin: 0 0.2rem;
+  }
+}

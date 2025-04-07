@@ -1,0 +1,18 @@
+/* src/styles/cursor-override.css */
+
+/* Target the canvas element created by cursor-effects */
+.fairy-dust-cursor,
+canvas.fairy-dust-cursor {
+  position: fixed !important;
+  pointer-events: none !important;
+  z-index: 999999 !important; /* Extremely high z-index */
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Ensure no other elements can have a higher z-index */
+body * {
+  z-index: auto; /* Reset z-index for other elements if needed */
+}

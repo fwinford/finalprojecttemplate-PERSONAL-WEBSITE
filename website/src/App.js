@@ -8,7 +8,7 @@ import { fairyDustCursor } from 'cursor-effects';
 
 const App = () => {
   useEffect(() => {
-    // Initialize the fairy dust cursor effect when the component mounts
+    // Initialize the fairy dust cursor effect
     const cursorEffect = new fairyDustCursor({
       colors: [
         'rgba(255, 158, 177, 0.8)', // Pink
@@ -16,10 +16,23 @@ const App = () => {
         'rgba(187, 255, 203, 0.8)', // Light green
         'rgba(255, 223, 165, 0.8)', // Peach
         'rgba(209, 178, 255, 0.8)'  // Lavender
-      ], // Colors that match your star cursor
+      ]
     });
     
-    // Clean up the effect when the component unmounts
+    // Find the canvas element created by the cursor effect
+    setTimeout(() => {
+      const cursorCanvas = document.querySelector('canvas');
+      if (cursorCanvas) {
+        // Apply styles directly to ensure it's on top
+        cursorCanvas.style.position = 'fixed';
+        cursorCanvas.style.pointerEvents = 'none';
+        cursorCanvas.style.zIndex = '999999';
+        cursorCanvas.style.top = '0';
+        cursorCanvas.style.left = '0';
+        cursorCanvas.classList.add('fairy-dust-cursor');
+      }
+    }, 100); // Small delay to ensure the canvas is created
+    
     return () => {
       cursorEffect.destroy();
     };
