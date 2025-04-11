@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 
 // Image paths - based on your file structure
 const imagePaths = [
-  require('../assets/private/image1.jpg'),
+  require('../assets/private/volunteering.jpeg'),
   require('../assets/private/image2.jpg'),
   require('../assets/private/image3.jpg'),
   require('../assets/private/image4.jpg')
@@ -12,12 +12,12 @@ const ImageGallery = ({ onImageChange }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const galleryRef = useRef(null);
   
-  // Memoize the gallery data to prevent recreation on each render
-  const galleryItems = useMemo(() => [
+  // Gallery data
+  const galleryItems = [
     {
       mainImage: imagePaths[0],
-      location: "Hackathon, SF",
-      caption: "I built my first web app here with no sleep and too much coffee. The energy of working alongside other passionate developers pushed me to learn faster than I thought possible."
+      location: "New Orleans, Louisianna",
+      caption: "I’ve spent my spring breaks volunteering in New Orleans and New York."
     },
     {
       mainImage: imagePaths[1],
@@ -34,7 +34,7 @@ const ImageGallery = ({ onImageChange }) => {
       location: "Community Event, Chicago",
       caption: "Because tech isn't all I do—I care about justice too. I volunteer with organizations that use technology to address social challenges and create positive change."
     }
-  ], []); // Empty dependency array means this only runs once
+  ];
 
   // Navigate to next image
   const goToNext = useCallback(() => {
@@ -62,11 +62,6 @@ const ImageGallery = ({ onImageChange }) => {
     }
   }, [galleryItems, onImageChange]);
 
-  // Handle click on main image to advance to next
-  const handleImageClick = useCallback(() => {
-    goToNext();
-  }, [goToNext]);
-
   // Add keyboard navigation for accessibility
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -93,22 +88,25 @@ const ImageGallery = ({ onImageChange }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Notify parent of initial caption on mount
+  useEffect(() => {
+    if (onImageChange && galleryItems.length > 0) {
+      onImageChange(galleryItems[0].caption);
+    }
+  }, [onImageChange, galleryItems]);
+
   return (
     <div className="personal-gallery" ref={galleryRef}>
-      {/* Main image container */}
-      <div 
-        className="gallery-image-container" 
-        onClick={handleImageClick}
-        role="button"
-        aria-label="View next image"
-        tabIndex="0"
-      >
+      <div className="gallery-image-container">
         {galleryItems.map((item, index) => (
           <div 
             key={index}
             className={`gallery-image-wrapper ${index === activeIndex ? 'active' : ''}`}
-            style={{ opacity: index === activeIndex ? 1 : 0 }}
-            aria-hidden={index !== activeIndex}
+            style={{ 
+              opacity: index === activeIndex ? 1 : 0,
+              position: index === activeIndex ? 'relative' : 'absolute',
+              zIndex: index === activeIndex ? 2 : 1
+            }}
           >
             <img 
               src={item.mainImage} 
@@ -122,12 +120,22 @@ const ImageGallery = ({ onImageChange }) => {
         ))}
         
         {/* Arrow navigation */}
-        <div className="gallery-arrow gallery-arrow-left" onClick={(e) => { e.stopPropagation(); goToPrev(); }} aria-label="Previous image">
+        <button 
+          className="gallery-arrow gallery-arrow-left" 
+          onClick={goToPrev} 
+          aria-label="Previous image"
+          type="button"
+        >
           &#10094;
-        </div>
-        <div className="gallery-arrow gallery-arrow-right" onClick={(e) => { e.stopPropagation(); goToNext(); }} aria-label="Next image">
+        </button>
+        <button 
+          className="gallery-arrow gallery-arrow-right" 
+          onClick={goToNext} 
+          aria-label="Next image"
+          type="button"
+        >
           &#10095;
-        </div>
+        </button>
       </div>
       
       {/* Navigation dots */}
@@ -140,6 +148,7 @@ const ImageGallery = ({ onImageChange }) => {
             aria-label={`View image ${index + 1}`}
             aria-selected={index === activeIndex}
             role="tab"
+            type="button"
           />
         ))}
       </div>

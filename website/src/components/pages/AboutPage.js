@@ -6,7 +6,7 @@ import Footer from '../shared/Footer';
 const AboutPage = () => {
   // State to hold the current image caption
   const [currentCaption, setCurrentCaption] = useState(
-    "I built my first web app here with no sleep and too much coffee. The energy of working alongside other passionate developers pushed me to learn faster than I thought possible."
+    ""
   );
   
   // State to track if elements are visible
@@ -89,6 +89,8 @@ const AboutPage = () => {
 
   return (
     <div className="full-page-section">
+      
+      <h2 className="section-title">A Little Bit About Me</h2>
       <div className="about-container">
         
         <div className="about-content-wrapper">
@@ -129,7 +131,7 @@ const AboutPage = () => {
             <div className="gradient-path"></div>
           </div>
           
-          <h2 className="transition-heading">RECENT MILESTONES</h2>
+          <h2 className="transition-heading">MileStones</h2>
         </div>
         
         {/* Updates Section - hiding the title since we have RECENT MILESTONES */}

@@ -105,6 +105,11 @@
   margin-top: 0;
 }
 
+.cd-timeline-block:last-child,
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
 /* Tighter spacing for updates section */
 .updates-section .cd-timeline-block {
   margin: 0.5rem 0; /* Much tighter spacing */

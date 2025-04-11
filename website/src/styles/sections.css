@@ -47,7 +47,6 @@
  */
 .full-page-section {
   min-height: calc(100vh - 60px);
-  padding: 2rem;
   margin-top: 60px;
 }
 

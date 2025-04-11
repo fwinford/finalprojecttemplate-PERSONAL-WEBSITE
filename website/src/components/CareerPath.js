@@ -5,14 +5,15 @@ import { getHighlightedExperiences } from '../data/ExperienceData';
 const CareerPath = () => {
   const [activeNode, setActiveNode] = useState(null);
   const [hoveredNode, setHoveredNode] = useState(null);
-  const nodeRefs = useRef([]);
+  const [positions, setPositions] = useState({});
   const containerRef = useRef(null);
   const nodeData = useRef([]);
   const animationRef = useRef(null);
-  const linesRef = useRef(null); // Reference to SVG element for lines
-  const linesData = useRef([]);  // Stores array of { lineElement, fromId, toId }
+  const linesRef = useRef(null);
+  const linesData = useRef([]);
+  const initialized = useRef(false);
 
-  // Z-index values for different node states
+  // Z-index values
   const Z_INDEX = {
     BASE: 1,
     HOVER: 5,
@@ -45,7 +46,7 @@ const CareerPath = () => {
     const getStartDate = (dateStr) => {
       const parts = dateStr.split(' - ')[0].trim().split(' ');
       const month = parts[0];
-      const year = parseInt(parts[1]);
+      const year = parseInt(parts[1] || '2023');
 
       const months = {
         'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
@@ -66,127 +67,208 @@ const CareerPath = () => {
     return gradientColors[index % gradientColors.length];
   };
 
-  // Handle node click: just set activeNode in state
-  const handleNodeClick = (id) => {
-    setActiveNode(activeNode === id ? null : id);
-  };
+  // Handle node click
+  const handleNodeClick = useCallback((id) => {
+    setActiveNode(prevActive => prevActive === id ? null : id);
+  }, []);
 
-  // Handle node hover: just set hoveredNode in state and update lines
-  const handleNodeHover = (id, isEntering) => {
+  // Handle node hover
+  const handleNodeHover = useCallback((id, isEntering) => {
     setHoveredNode(isEntering ? id : null);
     updateConnectionLinesForHover(isEntering ? id : null);
-  };
+  }, []);
 
-  // Draw connection lines between chronological nodes (create once)
+  // Update line styles on hover
+  const updateConnectionLinesForHover = useCallback((hoveredId) => {
+    if (!linesRef.current) return;
+    
+    const lines = linesRef.current.querySelectorAll('path');
+    if (!lines.length) return;
+
+    if (hoveredId === null) {
+      // Reset all lines to base state
+      lines.forEach(line => {
+        try {
+          line.setAttribute('stroke', 'rgba(200, 200, 200, 0.5)');
+          line.setAttribute('stroke-width', '1');
+        } catch (e) {
+          // Silent error handling
+        }
+      });
+      return;
+    }
+
+    // First, reset all lines to base state
+    lines.forEach(line => {
+      try {
+        line.setAttribute('stroke', 'rgba(200, 200, 200, 0.5)');
+        line.setAttribute('stroke-width', '1');
+      } catch (e) {
+        // Silent error handling
+      }
+    });
+
+    // Then, highlight lines connected to the hovered node
+    lines.forEach(line => {
+      try {
+        const fromId = line.getAttribute('data-from');
+        const toId = line.getAttribute('data-to');
+        if (fromId === hoveredId.toString() || toId === hoveredId.toString()) {
+          line.setAttribute('stroke', 'rgba(200, 200, 200, 0.9)');
+          line.setAttribute('stroke-width', '2');
+        }
+      } catch (e) {
+        // Silent error handling
+      }
+    });
+  }, []);
+
+  // Update zigzag line positions
+  const updateLinePositions = useCallback(() => {
+    if (!linesData.current.length) return;
+    
+    linesData.current.forEach(({ pathElement, fromId, toId }) => {
+      if (!pathElement) return;
+      
+      const fromNode = nodeData.current.find(n => n && n.id === fromId);
+      const toNode = nodeData.current.find(n => n && n.id === toId);
+      if (!fromNode || !toNode) return;
+
+      // Calculate path points
+      const x1 = fromNode.x + fromNode.width / 2;
+      const y1 = fromNode.y + fromNode.height / 2;
+      const x2 = toNode.x + toNode.width / 2;
+      const y2 = toNode.y + toNode.height / 2;
+      
+      // Create zigzag path
+      const midY = (y1 + y2) / 2;
+      
+      const path = `M ${x1} ${y1} V ${midY} H ${x2} V ${y2}`;
+
+      try {
+        pathElement.setAttribute('d', path);
+      } catch (e) {
+        // Silent error handling
+      }
+    });
+  }, []);
+
+  // Draw zigzag connection lines between nodes
   const drawConnectionLines = useCallback(() => {
     if (!linesRef.current || nodeData.current.length < 2) return;
 
-    // Clear existing lines from the SVG element
-    while (linesRef.current.firstChild) {
-      linesRef.current.removeChild(linesRef.current.firstChild);
+    console.log("Drawing zigzag connection lines between nodes...");
+
+    // Clear existing lines
+    try {
+      while (linesRef.current && linesRef.current.firstChild) {
+        linesRef.current.removeChild(linesRef.current.firstChild);
+      }
+    } catch (e) {
+      console.warn('Error clearing SVG lines:', e);
     }
+    
     linesData.current = [];
 
-    // Sort nodes by chronological order (same as sortedNodes)
+    // Sort nodes by chronological order
     const sortedNodeData = [...nodeData.current]
-      .sort((a, b) => a.id - b.id)
-      .filter(Boolean);
+      .filter(Boolean)
+      .sort((a, b) => a.index - b.index);
 
-    // Create a line between each node and the next one
+    // Create zigzag paths between nodes
     for (let i = 0; i < sortedNodeData.length - 1; i++) {
       const currentNode = sortedNodeData[i];
       const nextNode = sortedNodeData[i + 1];
       if (!currentNode || !nextNode) continue;
 
-      // Create a <line> in the SVG
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('stroke', 'rgba(200, 200, 200, 0.3)');
-      line.setAttribute('stroke-width', '1');
-      line.setAttribute('stroke-dasharray', '4,4');
-      line.setAttribute('data-from', currentNode.id);
-      line.setAttribute('data-to', nextNode.id);
+      try {
+        // Create a path element for zigzag lines
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('stroke', 'rgba(200, 200, 200, 0.3)');
+        path.setAttribute('stroke-width', '1');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke-dasharray', '4,4');
+        path.setAttribute('data-from', currentNode.id);
+        path.setAttribute('data-to', nextNode.id);
+        path.setAttribute('style', 'pointer-events: none; visibility: visible;');
 
-      // Append to the SVG
-      linesRef.current.appendChild(line);
+        // Calculate path points
+        const x1 = currentNode.x + currentNode.width / 2;
+        const y1 = currentNode.y + currentNode.height / 2;
+        const x2 = nextNode.x + nextNode.width / 2;
+        const y2 = nextNode.y + nextNode.height / 2;
+        
+        // Create zigzag path
+        const midY = (y1 + y2) / 2;
+        const path_d = `M ${x1} ${y1} V ${midY} H ${x2} V ${y2}`;
+        
+        path.setAttribute('d', path_d);
 
-      // Save the line element with its associated node IDs
-      linesData.current.push({
-        lineElement: line,
-        fromId: currentNode.id,
-        toId: nextNode.id
-      });
-    }
-  }, []);
-
-  // Update line endpoints so they follow the nodes
-  const updateLinePositions = useCallback(() => {
-    linesData.current.forEach(({ lineElement, fromId, toId }) => {
-      const fromNode = nodeData.current.find(n => n.id === fromId);
-      const toNode = nodeData.current.find(n => n.id === toId);
-      if (!fromNode || !toNode) return;
-
-      const x1 = fromNode.x + fromNode.width / 2;
-      const y1 = fromNode.y + fromNode.height / 2;
-      const x2 = toNode.x + toNode.width / 2;
-      const y2 = toNode.y + toNode.height / 2;
-
-      lineElement.setAttribute('x1', x1);
-      lineElement.setAttribute('y1', y1);
-      lineElement.setAttribute('x2', x2);
-      lineElement.setAttribute('y2', y2);
-    });
-  }, []);
-
-  const updateConnectionLinesForHover = (hoveredId) => {
-    if (!linesRef.current) return;
-    const lines = linesRef.current.querySelectorAll('line');
-
-    if (hoveredId === null) {
-      // Reset all lines to base state with a darker base opacity
-      lines.forEach(line => {
-        line.setAttribute('stroke', 'rgba(200, 200, 200, 0.5)');
-        line.setAttribute('stroke-width', '1');
-      });
-      return;
-    }
-
-    // For hovered state: first, set all lines to the base state
-    lines.forEach(line => {
-      line.setAttribute('stroke', 'rgba(200, 200, 200, 0.5)');
-      line.setAttribute('stroke-width', '1');
-    });
-
-    // Then, darken the two lines: the one starting at the hovered node and the next one
-    lines.forEach(line => {
-      const fromId = parseInt(line.getAttribute('data-from'), 10);
-      if (fromId === hoveredId || fromId === hoveredId + 1) {
-        line.setAttribute('stroke', 'rgba(200, 200, 200, 0.9)');
-        line.setAttribute('stroke-width', '2');
+        if (linesRef.current) {
+          linesRef.current.appendChild(path);
+          linesData.current.push({
+            pathElement: path,
+            fromId: currentNode.id,
+            toId: nextNode.id
+          });
+        }
+      } catch (e) {
+        console.warn('Error creating zigzag path:', e);
       }
-    });
-  };
+    }
+
+    console.log(`Created ${linesData.current.length} zigzag connection lines`);
+  }, []);
 
   // Check if two rectangles overlap (for collision detection)
-  const checkRectangleOverlap = (rectA, rectB) => {
+  const checkRectangleOverlap = useCallback((rectA, rectB) => {
     return (
       rectA.x < rectB.x + rectB.width &&
       rectA.x + rectA.width > rectB.x &&
       rectA.y < rectB.y + rectB.height &&
       rectA.y + rectA.height > rectB.y
     );
-  };
+  }, []);
 
-  // Floating animation (with collisions)
+  // Directly update DOM for animations without going through React state
+  const updateNodePositionsInDOM = useCallback(() => {
+    nodeData.current.forEach(node => {
+      if (!node) return;
+      
+      const nodeElement = document.getElementById(`career-node-${node.id}`);
+      if (!nodeElement) return;
+
+      try {
+        nodeElement.style.left = `${node.x}px`;
+        nodeElement.style.top = `${node.y}px`;
+      } catch (e) {
+        console.warn("Error updating node position:", e);
+      }
+    });
+  }, []);
+
+  // Floating animation with collision detection
   const startFloatingAnimation = useCallback(() => {
+    let frameCount = 0;
+    console.log("Starting floating animation...");
+    
     const animate = () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current) {
+        console.log("Container not available, stopping animation");
+        return;
+      }
+
+      frameCount++;
+      if (frameCount % 100 === 0) {
+        console.log(`Animation running: frame ${frameCount}`);
+      }
 
       const containerWidth = containerRef.current.offsetWidth;
       const containerHeight = containerRef.current.offsetHeight;
 
       // Update positions based on velocities
       nodeData.current.forEach(node => {
-        if (!node || !node.node) return;
+        if (!node) return;
 
         node.x += node.vx;
         node.y += node.vy;
@@ -240,6 +322,8 @@ const CareerPath = () => {
             const dx = centerBX - centerAX;
             const dy = centerBY - centerAY;
             const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance === 0) continue; // Avoid division by zero
 
             const nx = dx / distance;
             const ny = dy / distance;
@@ -277,26 +361,38 @@ const CareerPath = () => {
       }
 
       // Apply new positions to DOM
-      nodeData.current.forEach(node => {
-        if (!node || !node.node) return;
-        node.node.style.left = `${node.x}px`;
-        node.node.style.top = `${node.y}px`;
-      });
+      updateNodePositionsInDOM();
 
-      // Update line endpoints so they follow the node movements
+      // Update line positions
       updateLinePositions();
 
       // Continue animation
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
-  }, [updateLinePositions]);
+    // Start the animation loop
+    animationRef.current = requestAnimationFrame(animate);
+    
+    // Return cleanup function
+    return () => {
+      console.log("Cleaning up animation");
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+    };
+  }, [updateLinePositions, checkRectangleOverlap, updateNodePositionsInDOM]);
 
-  // Initialize node positions, lines, and start animation
+  // Initialize node positions and start animation
   useEffect(() => {
     if (!containerRef.current) return;
-
+    
+    // Ensure we initialize only once
+    if (initialized.current) return;
+    
+    console.log("Initializing CareerPath component...");
+    
+    // Set container height based on number of nodes
     const containerWidth = containerRef.current.offsetWidth;
     const containerHeight = Math.max(
       window.innerHeight,
@@ -304,91 +400,118 @@ const CareerPath = () => {
     );
     containerRef.current.style.height = `${containerHeight}px`;
 
+    // Node dimensions
     const nodeWidth = 340;
     const nodeHeight = 180;
+    
+    // Calculate available width for positioning with more spread
     const availableWidth = containerWidth - nodeWidth - 40;
 
-    nodeData.current = nodeRefs.current.map((node, index) => {
-      if (!node) return null;
+    // Initialize node data with consistent positions
+    const initialPositions = {};
+    
+    // Wait for DOM to be ready
+    setTimeout(() => {
+      nodeData.current = sortedNodes.map((node, index) => {
+        // Vertical position: evenly spaced without random variance
+        const verticalPosition = 50 + index * 220; // Increased vertical spacing
 
-      const verticalVariance = Math.random() * 60 - 30;
-      const verticalPosition =
-        index === 0
-          ? 50 + verticalVariance
-          : 50 + index * 200 + verticalVariance;
+        // Horizontal position: alternate between left and right sides with more spread
+        let horizontalPosition;
+        if (index % 2 === 0) {
+          // Left side - 10% from left edge (more to the left)
+          horizontalPosition = 0.1 * availableWidth;
+        } else {
+          // Right side - 80% from left edge (more to the right)
+          horizontalPosition = 0.8 * availableWidth;
+        }
 
-      let horizontalPosition;
-      if (index % 2 === 0) {
-        // Even indices - left-ish
-        horizontalPosition = (0.05 + Math.random() * 0.3) * availableWidth;
-      } else {
-        // Odd indices - right-ish
-        horizontalPosition = (0.65 + Math.random() * 0.3) * availableWidth;
+        // Make sure we don't go off screen
+        horizontalPosition = Math.max(
+          0,
+          Math.min(containerWidth - nodeWidth, horizontalPosition)
+        );
+
+        // Store initial position
+        initialPositions[node.id] = { x: horizontalPosition, y: verticalPosition };
+
+        // Set initial velocity based on position (nodes will move away from their starting side)
+        // Left side nodes move right, right side nodes move left
+        const directionMultiplier = index % 2 === 0 ? 1 : -1;
+        const vx = 0.2 * directionMultiplier;
+        const vy = 0.1; // Small downward drift
+
+        // Return node data object
+        return {
+          id: node.id,
+          index: index,
+          x: horizontalPosition,
+          y: verticalPosition,
+          width: nodeWidth,
+          height: nodeHeight,
+          vx,
+          vy,
+          mass: 1 + Math.sin(index) * 0.2
+        };
+      });
+
+      // Update positions state to trigger render with initial positions
+      setPositions(initialPositions);
+
+      console.log(`Initialized ${nodeData.current.length} nodes`);
+
+      // Create SVG for lines (below nodes)
+      if (!linesRef.current && containerRef.current) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.style.position = 'absolute';
+        svg.style.top = '0';
+        svg.style.left = '0';
+        svg.style.width = '100%';
+        svg.style.height = '100%';
+        svg.style.pointerEvents = 'none';
+        svg.style.zIndex = '0'; // behind the floating nodes
+        svg.style.overflow = 'visible';
+        containerRef.current.appendChild(svg);
+        linesRef.current = svg;
+        
+        console.log("Created SVG container for lines");
       }
 
-      horizontalPosition = Math.max(
-        0,
-        Math.min(containerWidth - nodeWidth, horizontalPosition)
-      );
+      // Draw lines after a short delay to ensure DOM is ready
+      setTimeout(() => {
+        drawConnectionLines();
+        
+        // Start animation with a small delay
+        setTimeout(() => {
+          startFloatingAnimation();
+        }, 200);
+      }, 100);
+    }, 100);
 
-      node.style.left = `${horizontalPosition}px`;
-      node.style.top = `${verticalPosition}px`;
-      node.style.zIndex = Z_INDEX.BASE;
+    // Mark as initialized
+    initialized.current = true;
 
-      const angle = (index * 2.5) % (2 * Math.PI);
-      const speed = 0.4 + (index % 3) * 0.1;
-      const vx = Math.cos(angle) * speed;
-      const vy = Math.sin(angle) * speed;
-
-      return {
-        id: index,
-        x: horizontalPosition,
-        y: verticalPosition,
-        width: nodeWidth,
-        height: nodeHeight,
-        vx,
-        vy,
-        mass: 1 + Math.sin(index) * 0.2,
-        node
-      };
-    }).filter(Boolean);
-
-    // Create SVG for lines (below nodes)
-    if (!linesRef.current) {
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.style.position = 'absolute';
-      svg.style.top = '0';
-      svg.style.left = '0';
-      svg.style.width = '100%';
-      svg.style.height = '100%';
-      svg.style.pointerEvents = 'none';
-      svg.style.zIndex = '0'; // behind the floating nodes
-      containerRef.current.appendChild(svg);
-      linesRef.current = svg;
-    }
-
-    // Draw lines once at init
-    drawConnectionLines();
-
-    // Start animation
-    startFloatingAnimation();
-
+    // Cleanup function
     return () => {
+      // Clean up animation
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
-      if (linesRef.current && containerRef.current) {
-        containerRef.current.removeChild(linesRef.current);
+      
+      // Remove SVG element
+      if (linesRef.current && containerRef.current && containerRef.current.contains(linesRef.current)) {
+        try {
+          containerRef.current.removeChild(linesRef.current);
+        } catch (e) {
+          console.warn("Could not remove SVG element:", e);
+        }
       }
+      linesRef.current = null;
     };
-  }, [
-    sortedNodes.length,
-    Z_INDEX.BASE,
-    drawConnectionLines,
-    startFloatingAnimation
-  ]);
+  }, [sortedNodes, drawConnectionLines, startFloatingAnimation]);
 
-  // Intersection Observer for fade-in
+  // Intersection Observer for fade-in effect
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -401,15 +524,17 @@ const CareerPath = () => {
       { threshold: 0.2 }
     );
 
-    const currentNodeRefs = nodeRefs.current;
-    currentNodeRefs.forEach((node) => {
-      if (node) observer.observe(node);
-    });
+    // Wait for DOM to be ready
+    const timeoutId = setTimeout(() => {
+      const nodes = document.querySelectorAll('.career-node');
+      nodes.forEach(node => {
+        observer.observe(node);
+      });
+    }, 100);
 
     return () => {
-      currentNodeRefs.forEach((node) => {
-        if (node) observer.unobserve(node);
-      });
+      clearTimeout(timeoutId);
+      observer.disconnect();
     };
   }, []);
 
@@ -426,18 +551,23 @@ const CareerPath = () => {
             const isActive = activeNode === node.id;
             const nodeColor = getNodeColor(index, isHovered);
             const companyColor = gradientColors[index % gradientColors.length].replace('0.85', '1');
+            
+            // Get position from state
+            const position = positions[node.id] || { x: 0, y: 0 };
 
             return (
               <div
                 key={node.id}
-                ref={(el) => (nodeRefs.current[index] = el)}
+                id={`career-node-${node.id}`}
                 className={`career-node ${isActive ? 'active' : ''}`}
                 onClick={() => handleNodeClick(node.id)}
                 onMouseEnter={() => handleNodeHover(node.id, true)}
                 onMouseLeave={() => handleNodeHover(node.id, false)}
                 style={{
                   position: 'absolute',
-                  transition: 'box-shadow 0.3s ease, transform 0.3s ease',
+                  left: `${position.x}px`,
+                  top: `${position.y}px`,
+                  transition: 'box-shadow 0.3s ease',
                   zIndex: isActive
                     ? Z_INDEX.ACTIVE
                     : isHovered

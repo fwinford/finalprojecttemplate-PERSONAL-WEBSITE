@@ -44,8 +44,7 @@
  * Large, bold display with distinctive styling
  */
 .about-section h2 {
-  font-family: 'Henotica', serif;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
   font-size: 6rem; /* FIXED: removed space between 6 and rem */
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
@@ -62,7 +61,6 @@
  * Medium-sized text with proper spacing and emphasis
  */
 .about-section p {
-  font-family: 'Playfair Display', serif;
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-xl);
   line-height: 1.6;
