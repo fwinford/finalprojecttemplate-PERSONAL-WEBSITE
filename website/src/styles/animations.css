@@ -53,13 +53,11 @@
 /**
  * Update item animations
  */
-.update-item, 
-.timeline-item {
+.update-item {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.update-item.animate-in,
-.timeline-item.animate-in {
+.update-item.animate-in {
   opacity: 1;
   transform: translateY(0);
 }

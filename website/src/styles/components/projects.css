@@ -1,0 +1,135 @@
+/* projects.css - Projects section styles */
+
+/* ==========================================================================
+   Projects Section
+   ========================================================================== */
+
+/**
+ * Projects section container
+ */
+ .projects-section {
+  margin: 4rem 0;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+/**
+ * Projects grid layout
+ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+/**
+ * Section headings
+ */
+.section-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--color-primary), #333);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/**
+ * Individual project card
+ */
+.project-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+/**
+ * Project featured image
+ */
+.project-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05);
+}
+
+/**
+ * Project content container
+ */
+.project-content {
+  padding: 1.8rem;
+}
+
+/**
+ * Project title
+ */
+.project-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 0.8rem;
+  font-family: var(--font-heading);
+  line-height: 1.3;
+}
+
+/**
+ * Project description
+ */
+.project-description {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/**
+ * Project tags container
+ */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/**
+ * Individual project tag
+ */
+.project-tag {
+  padding: 0.4rem 1rem;
+  background: rgba(232, 62, 140, 0.08);
+  color: var(--color-primary);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(232, 62, 140, 0.15);
+}
+
+.project-tag:hover {
+  background: rgba(232, 62, 140, 0.15);
+  transform: translateY(-2px);
+}

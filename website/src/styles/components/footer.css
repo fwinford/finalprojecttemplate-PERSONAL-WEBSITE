@@ -1,6 +1,6 @@
 .site-footer {
-    padding: 40px 0 20px; /* Reduced from 60px 0 30px */
-    margin-top: 60px; /* Reduced from 80px */
+    padding: 20px 0 10px; /* Reduced from 60px 0 30px */
+    margin-top: 25px; /* Reduced from 80px */
     background-color: rgba(248, 248, 250, 0.8);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
   }

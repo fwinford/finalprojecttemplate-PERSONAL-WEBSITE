@@ -15,15 +15,15 @@
 @import 'components/gallery.css';
 @import 'components/timeline.css';
 @import 'components/footer.css';
+@import 'components/projects.css';
 
 /* Import page-specific styles */
 @import 'page-styles/about-page.css';
 @import 'page-styles/about-section.css';
-@import 'page-styles/projects.css';
+@import 'page-styles/experience-page.css';
 
 /* Import animation and responsive styles */
 @import 'animations.css';
-@import 'responsive.css';
 
 /* Remove welcome text styles */
 .welcome-text {
