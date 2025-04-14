@@ -12,7 +12,7 @@ const ImageGallery = ({ onImageChange }) => {
   const galleryItems = useMemo(() => ([
     {
       mainImage: portraitImg,
-      location: "Silicone Valley, CA",
+      location: "Silicon Valley, CA",
       caption: "I've lived around the world: Australia, Mexico, Canada, Georgia, Texas, New York, Maryland, Trinidad"
     },
     {

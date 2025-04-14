@@ -110,7 +110,7 @@ const AboutPage = () => {
               
               <p>
               Outside of coding, I'm someone who really values community and advocacy. <br />
-               I've stayed up way too late organizing files for friends, and love finding joy in small things — like a good playlist or a solid thrift find.
+               I've stayed up way too late watching tv-shows, and love finding joy in small things — like a good playlist or a solid thrift find.
                 You can usually catch me building something, helping someone, or making a new Notion template I probably didn't need.
               </p>
             </div>

@@ -72,42 +72,32 @@ const CareerPath = () => {
     setActiveNode(prevActive => prevActive === id ? null : id);
   }, []);
 
-  // Handle node hover
-  const handleNodeHover = useCallback((id, isEntering) => {
-    setHoveredNode(isEntering ? id : null);
-    updateConnectionLinesForHover(isEntering ? id : null);
-  }, []);
-
   // Update line styles on hover
   const updateConnectionLinesForHover = useCallback((hoveredId) => {
     if (!linesRef.current) return;
     
     const lines = linesRef.current.querySelectorAll('path');
     if (!lines.length) return;
-
+ 
     if (hoveredId === null) {
       // Reset all lines to base state
       lines.forEach(line => {
         try {
           line.setAttribute('stroke', 'rgba(200, 200, 200, 0.5)');
           line.setAttribute('stroke-width', '1');
-        } catch (e) {
-          // Silent error handling
-        }
+        } catch (e) {}
       });
       return;
     }
-
+ 
     // First, reset all lines to base state
     lines.forEach(line => {
       try {
         line.setAttribute('stroke', 'rgba(200, 200, 200, 0.5)');
         line.setAttribute('stroke-width', '1');
-      } catch (e) {
-        // Silent error handling
-      }
+      } catch (e) {}
     });
-
+ 
     // Then, highlight lines connected to the hovered node
     lines.forEach(line => {
       try {
@@ -117,11 +107,15 @@ const CareerPath = () => {
           line.setAttribute('stroke', 'rgba(200, 200, 200, 0.9)');
           line.setAttribute('stroke-width', '2');
         }
-      } catch (e) {
-        // Silent error handling
-      }
+      } catch (e) {}
     });
   }, []);
+ 
+  // Handle node hover
+  const handleNodeHover = useCallback((id, isEntering) => {
+    setHoveredNode(isEntering ? id : null);
+    updateConnectionLinesForHover(isEntering ? id : null);
+  }, [updateConnectionLinesForHover]);
 
   // Update zigzag line positions
   const updateLinePositions = useCallback(() => {
@@ -184,6 +178,7 @@ const CareerPath = () => {
       try {
         // Create a path element for zigzag lines
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('vector-effect', 'non-scaling-stroke');
         path.setAttribute('stroke', 'rgba(200, 200, 200, 0.3)');
         path.setAttribute('stroke-width', '1');
         path.setAttribute('fill', 'none');
@@ -386,6 +381,7 @@ const CareerPath = () => {
   // Initialize node positions and start animation
   useEffect(() => {
     if (!containerRef.current) return;
+    const container = containerRef.current;
     
     // Ensure we initialize only once
     if (initialized.current) return;
@@ -470,6 +466,11 @@ const CareerPath = () => {
         svg.style.height = '100%';
         svg.style.pointerEvents = 'none';
         svg.style.zIndex = '0'; // behind the floating nodes
+        svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        svg.style.display = 'block';
+        svg.style.backgroundColor = 'transparent';
+        svg.setAttribute('preserveAspectRatio', 'none');
+        svg.setAttribute('aria-hidden', 'true');
         svg.style.overflow = 'visible';
         containerRef.current.appendChild(svg);
         linesRef.current = svg;
@@ -500,9 +501,9 @@ const CareerPath = () => {
       }
       
       // Remove SVG element
-      if (linesRef.current && containerRef.current && containerRef.current.contains(linesRef.current)) {
+      if (linesRef.current && container && container.contains(linesRef.current)) {
         try {
-          containerRef.current.removeChild(linesRef.current);
+          container.removeChild(linesRef.current);
         } catch (e) {
           console.warn("Could not remove SVG element:", e);
         }

@@ -133,3 +133,33 @@
   background: rgba(232, 62, 140, 0.15);
   transform: translateY(-2px);
 }
+
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 16px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-content {
+    padding: 1.2rem;
+  }
+
+  .project-title {
+    font-size: 1.3rem;
+  }
+
+  .project-description {
+    font-size: 0.95rem;
+  }
+
+  .project-tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+  }
+}

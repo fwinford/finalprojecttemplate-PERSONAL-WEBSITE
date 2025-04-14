@@ -1,4 +1,3 @@
-// src/data/socialLinks.js
 import { FaLinkedinIn, FaGithub, FaFileAlt } from 'react-icons/fa';
 
 const socialLinks = [
@@ -19,7 +18,7 @@ const socialLinks = [
   {
     id: 'resume',
     name: 'Resume',
-    url: 'website/src/assets/F-Winford.pdf', // Update with your actual resume path
+    url: '/F-Winford.pdf', 
     icon: FaFileAlt,
     ariaLabel: 'View my resume'
   }

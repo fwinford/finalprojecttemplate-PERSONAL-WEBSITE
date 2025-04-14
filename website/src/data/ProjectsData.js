@@ -8,7 +8,7 @@ const projectData = [
     title: "Personal Portfolio",
     description: "Like Inception, but for personal websites",
     image: websiteImg, // Swap for your actual portfolio image
-    link: "http://localhost:3000",
+    link: "https://www.faithwinford.com/",
     stack: ["React", "Tailwind CSS", "Vite"]
   }, 
     {

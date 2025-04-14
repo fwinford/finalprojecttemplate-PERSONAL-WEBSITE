@@ -78,7 +78,7 @@ const Updates = ({ hideTitle = false }) => {
         {updates.map((update, index) => (
           <div 
             key={update.id} 
-            className="update-item cd-timeline-block"
+            className={`update-item cd-timeline-block ${index === 0 ? 'first-item' : ''}`}
             ref={el => updateItemsRef.current[index] = el}
           >
             <div className="cd-timeline-img"></div>

@@ -8,7 +8,7 @@
  * Hero section with personal introduction
  * Displays at 4/5 of viewport height with centered content
  */
- .about-section {
+.about-section {
   /* Layout */
   display: flex;
   flex-direction: column;
@@ -44,7 +44,9 @@
  * Large, bold display with distinctive styling
  */
 .about-section h2 {
-  font-weight: var(--font-weight-regular);
+  font-weight: 200;
+  transform: scaleY(0.95);
+  letter-spacing: 0.01em;
   font-size: 6rem; /* FIXED: removed space between 6 and rem */
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
@@ -149,4 +151,21 @@
 .highlight-word:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+@media (max-width: 600px) {
+  .about-section h2 {
+    font-size: 3rem;
+  }
+
+  .about-section p {
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    padding: 0 1rem;
+  }
+
+  .learn-more {
+    font-size: var(--font-size-base);
+    margin-top: 1.5rem;
+  }
 }
