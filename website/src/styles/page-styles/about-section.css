@@ -52,7 +52,7 @@
  */
 .about-section h2 {
   font-family: 'Henotica', var(--font-heading), serif;
-  font-weight: 200;
+  font-weight: 200;c
   font-size: 7rem; /* FIXED: removed space between 6 and rem */
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
