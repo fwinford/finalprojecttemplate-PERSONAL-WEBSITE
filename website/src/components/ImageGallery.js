@@ -1,40 +1,36 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
-
-// Image paths - based on your file structure
-const imagePaths = [
-  require('../assets/private/volunteering.jpeg'),
-  require('../assets/private/image2.jpg'),
-  require('../assets/private/image3.jpg'),
-  require('../assets/private/image4.jpg')
-];
+import React, { useState, useCallback, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
+import portraitImg from '../assets/private/portrait.jpg';
+import volunteeringImg from '../assets/private/volunteering.jpeg';
+import beachImg from '../assets/private/beach.jpg';
+import colorstackImg from '../assets/private/colorstack.jpg';
 
 const ImageGallery = ({ onImageChange }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const galleryRef = useRef(null);
   
   // Gallery data
-  const galleryItems = [
+  const galleryItems = useMemo(() => ([
     {
-      mainImage: imagePaths[0],
-      location: "New Orleans, Louisianna",
+      mainImage: portraitImg,
+      location: "Silicone Valley, CA",
+      caption: "I've lived around the world: Australia, Mexico, Canada, Georgia, Texas, New York, Maryland, Trinidad"
+    },
+    {
+      mainImage: volunteeringImg,
+      location: "New Orleans, Louisiana",
       caption: "I’ve spent my spring breaks volunteering in New Orleans and New York."
     },
     {
-      mainImage: imagePaths[1],
-      location: "Trinidad and Tobago 🇹🇹",
-      caption: "And I'm from Trinidad and Tobago 🇹🇹. My cultural background has given me a unique perspective on problem-solving and connecting with diverse teams."
+      mainImage: beachImg,
+      location: "Trinidad and Tobago",
+      caption: "Why see the world, when you've got the beach - Frank Ocean"
     },
     {
-      mainImage: imagePaths[2],
-      location: "Conference, NY",
-      caption: "Attending tech conferences broadened my understanding of emerging frameworks and industry best practices. I love connecting with others in the field."
-    },
-    {
-      mainImage: imagePaths[3],
-      location: "Community Event, Chicago",
-      caption: "Because tech isn't all I do—I care about justice too. I volunteer with organizations that use technology to address social challenges and create positive change."
+      mainImage: colorstackImg,
+      location: "Chicago, Illinois",
+      caption: "Ask me on LinkedIn about ColorStack"
     }
-  ];
+  ]), []);
 
   // Navigate to next image
   const goToNext = useCallback(() => {
@@ -89,11 +85,11 @@ const ImageGallery = ({ onImageChange }) => {
   }, []);
 
   // Notify parent of initial caption on mount
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (onImageChange && galleryItems.length > 0) {
-      onImageChange(galleryItems[0].caption);
+      onImageChange(galleryItems[activeIndex].caption);
     }
-  }, [onImageChange, galleryItems]);
+  }, [activeIndex, onImageChange, galleryItems]);
 
   return (
     <div className="personal-gallery" ref={galleryRef}>
@@ -105,7 +101,7 @@ const ImageGallery = ({ onImageChange }) => {
             style={{ 
               opacity: index === activeIndex ? 1 : 0,
               position: index === activeIndex ? 'relative' : 'absolute',
-              zIndex: index === activeIndex ? 2 : 1
+              display: index === activeIndex ? 'block' : 'none'
             }}
           >
             <img 

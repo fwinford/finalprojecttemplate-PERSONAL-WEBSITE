@@ -18,21 +18,6 @@ const experienceData = [
     },
     {
       id: 2,
-      title: "Software Engineer",
-      company: "Headstart",
-      organization: "Headstart", // For CareerPath component
-      location: "Remote",
-      date: "March 2024 - Present",
-      description: "Building applications that make a difference in education technology.",
-      responsibilities: [
-        "Developing innovative software solutions for educational technology platforms",
-        "Implementing responsive design principles and modern frontend frameworks"
-      ],
-      skills: ["React", "Node.js", "UI/UX"],
-      lessons: "Discovered how to balance technical requirements with user needs."
-    },
-    {
-      id: 3,
       title: "Technical Solutions Specialist",
       company: "Restoration Chiropractic",
       organization: "Restoration Chiropractic",
@@ -47,7 +32,7 @@ const experienceData = [
       lessons: "Learned how the right technical tools can transform small business operations."
     },
     {
-      id: 4,
+      id: 3,
       title: "IT Intern",
       company: "Blessed Sacrament Catholic School",
       organization: "Blessed Sacrament",
@@ -62,7 +47,7 @@ const experienceData = [
       lessons: "Discovered the importance of proactive maintenance in educational technology environments."
     },
     {
-      id: 5,
+      id: 4,
       title: "Website Maintainer",
       company: "BUGS @ NYU",
       organization: "BUGS @ NYU",
@@ -76,7 +61,7 @@ const experienceData = [
       lessons: "Learned the importance of continuous maintenance for web platforms."
     },
     {
-      id: 6,
+      id: 5,
       title: "Mathematics Tutor",
       company: "America Reads*America Counts",
       organization: "America Reads*America Counts",

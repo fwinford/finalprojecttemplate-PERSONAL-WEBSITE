@@ -5,6 +5,8 @@ import HomePage from './components/pages/HomePage';
 import AboutPage from './components/pages/AboutPage';
 import ExperiencePage from './components/pages/ExperiencePage';
 import { fairyDustCursor } from 'cursor-effects';
+import ScrollToTop from './components/ScrolltoTop';
+
 
 const App = () => {
   useEffect(() => {
@@ -43,6 +45,7 @@ const App = () => {
       <div className="app">
         <Navigation />
         <main className="main-content">
+        <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />

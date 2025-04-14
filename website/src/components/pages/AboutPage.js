@@ -98,9 +98,10 @@ const AboutPage = () => {
           <div className="about-text-column" ref={textColumnRef}>
             <div className="about-story">
               <p>
-                As a HeadStart Fellowship fellow with a passion for software development and technology, 
-                I've embarked on a journey that combines creativity with technical expertise. My path hasn't 
-                been linear, but each step has contributed to my growth as a developer.
+              I'm a developer, student, and forever-in-progress problem solver.
+               I'm currently studying computer science and philosophy at NYU — which basically means I build things and question everything. <br />
+               I'm big on learning and using tech to help make people's lives easier — I like tech that has real impact. 
+               I've interned at nonprofits, schools, and banks where I've gotten to do just that.
               </p>
               
               <blockquote className="personal-narrative" ref={narrativeRef}>
@@ -108,9 +109,9 @@ const AboutPage = () => {
               </blockquote>
               
               <p>
-                My experience spans across various technologies and frameworks, allowing me to approach 
-                problems from multiple angles. I believe in continuous learning and pushing boundaries 
-                to create meaningful digital experiences.
+              Outside of coding, I'm someone who really values community and advocacy. <br />
+               I've stayed up way too late organizing files for friends, and love finding joy in small things — like a good playlist or a solid thrift find.
+                You can usually catch me building something, helping someone, or making a new Notion template I probably didn't need.
               </p>
             </div>
           </div>
@@ -123,12 +124,15 @@ const AboutPage = () => {
         
         {/* Journey to Updates Transition */}
         <div className={`section-transition ${transitionVisible ? 'visible' : ''}`}>
-          <p className="transition-text">
-            My journey continues to evolve with each new challenge and opportunity. Here's what I've been up to recently:
-          </p>
-          
           <div className="transition-visual">
             <div className="gradient-path"></div>
+            <div className="connector-dots">
+              <div className="connector-dot"></div>
+              <div className="connector-dot"></div>
+              <div className="connector-dot"></div>
+              <div className="connector-dot"></div>
+              <div className="connector-dot"></div>
+            </div>
           </div>
           
           <h2 className="transition-heading">MileStones</h2>
