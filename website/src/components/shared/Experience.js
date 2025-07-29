@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { getAllExperiences } from '../../data/ExperienceData';
 import projectData from '../../data/ProjectsData';
 import Footer from '../../components/Footer/Footer';
@@ -36,13 +37,25 @@ const Experience = () => {
           <section className="projects-section">
             <h2>Projects</h2>
             <div className="projects-grid">
-              {projectData.map((project) => (
+              {projectData.slice().reverse().map((project) => (
                 <div className="project-card" key={project.id}>
                   <a href={project.link} target="_blank" rel="noopener noreferrer">
                     <img src={project.image} alt={project.title} className="project-image" />
                   </a>
                   <div className="project-content">
-                    <h3 className="project-title">{project.title}</h3>
+                    <div className="project-header">
+                      <h3 className="project-title">{project.title}</h3>
+                      <div className="project-links">
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link" title="View Live Project">
+                          <FaExternalLinkAlt />
+                        </a>
+                        {project.githubLink && (
+                          <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="project-link github-link" title="View Source Code">
+                            <FaGithub />
+                          </a>
+                        )}
+                      </div>
+                    </div>
                     <p className="project-description">{project.description}</p>
                     {project.stack && (
                       <div className="project-tags">
